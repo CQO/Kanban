@@ -1,5 +1,4 @@
-"use strict";
-// 缓存邮件发送队列，发送单个邮件
+// buffer each user's email text in a queue, then flush them in single email
 Meteor.startup(() => {
   Notifications.subscribe('email', (user, title, description, params) => {
     // add quote to make titles easier to read in email text
@@ -35,7 +34,6 @@ Meteor.startup(() => {
           text,
         });
       } catch (e) {
-        console.log(e);
         return;
       }
     }, 30000);
