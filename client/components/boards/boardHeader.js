@@ -18,9 +18,9 @@ Template.boardMenuPopup.events({
 
 Template.boardMenuPopup.helpers({
   exportUrl() {
+    const boardId = Session.get('currentBoard');
     const loginToken = Accounts._storedLoginToken();
-    console.log(window.location.port);
-    return `?authToken=${loginToken}`;
+    return FlowRouter.url(`api/boards/${boardId}?authToken=${loginToken}`);
   },
   exportFilename() {
     const boardId = Session.get('currentBoard');
