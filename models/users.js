@@ -1,3 +1,4 @@
+
 Users = Meteor.users;
 
 Users.attachSchema(new SimpleSchema({
@@ -350,18 +351,12 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isServer) {
-  // Let mongoDB ensure username unicity
+  // 保证用户名的唯一性
   Meteor.startup(() => {
-    Users._collection._ensureIndex({
-      username: 1,
-    }, { unique: true });
+    Users._collection._ensureIndex({ username: 1,}, { unique: true });
   });
 
-  // Each board document contains the de-normalized number of users that have
-  // starred it. If the user star or unstar a board, we need to update this
-  // counter.
-  // We need to run this code on the server only, otherwise the incrementation
-  // will be done twice.
+  // 用户关注板块
   Users.after.update(function(userId, user, fieldNames) {
     // The `starredBoards` list is hosted on the `profile` field. If this
     // field hasn't been modificated we don't need to run this hook.

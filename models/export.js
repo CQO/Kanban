@@ -57,6 +57,7 @@ class Exporter {
     result.activities = Activities.find(byBoard, noBoardId).fetch();
     // for attachments we only export IDs and absolute url to original doc
     result.attachments = Attachments.find(byBoard).fetch().map((attachment) => {
+      console.log("标记");
       return {
         _id: attachment._id,
         cardId: attachment.cardId,

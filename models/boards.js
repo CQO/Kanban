@@ -220,6 +220,7 @@ Boards.helpers({
   },
 
   absoluteUrl() {
+    console.log("标记");
     return FlowRouter.url('board', { id: this._id, slug: this.slug });
   },
 
