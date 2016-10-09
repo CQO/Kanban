@@ -1,0 +1,201 @@
+@import 'nib'
+
+#header
+  color: white
+  transition: background-color 0.4s
+
+  #header-main-bar
+    height: 35px
+    padding: 2px 5px 0
+
+    .board-header-btns
+      display: block
+      width: auto
+
+      // XXX Use a flexbox instead of floats?
+      &.left
+        float: left
+        line-height: 35px
+        font-size: large
+
+      &.right
+        float: right
+
+      &.title
+        width: 200px
+        margin: 0 auto
+
+        a
+          float:left
+          font-size:large
+          line-height: 35px
+
+    .board-header-btn
+      padding: 0
+      height: 28px
+      font-size: 13px
+      float: left
+      overflow: hidden
+      line-height: @height
+      margin: 0 2px
+      border-radius: 7px
+      position: relative
+      background: rgba(51, 88, 156, 0.35)
+      box-shadow: 1px 3px #41629e
+
+      i.fa
+        float: left
+        display: block
+        line-height: 28px
+        color: darken(white, 5%)
+        margin: 0 8px
+        font-size: large
+
+        + span
+          display: inline-block
+          margin-top: 1px
+          margin-right: 10px
+
+      .board-header-btn-close
+        float: right
+
+        i.fa
+          margin: 0 6px
+
+      .avatar
+          background: 0
+          border-radius: 3px
+          top: -1px
+          left: 2px
+
+    .board-header-btn:hover
+      background: #87b4eb
+      box-shadow: 2px 4px #3f51b5
+
+    .board-header-btn:active
+      box-shadow: 0px 0px #717a33
+      top: 4px
+
+    .separator
+      margin: 2px 4px
+      border-left: 1px solid rgba(255, 255, 255, .3)
+      height: 24px
+      float: left
+
+#header-quick-access
+  color: white
+  transition: background-color 0.4s
+  background: #2573a7
+  height: 28px
+  font-size: 12px
+  display: flex
+
+  #header-user-bar,
+  #header-new-board-icon,
+  ul li
+    color: darken(white, 17%)
+
+    .fa
+      color: inherit
+
+    a:hover, a.is-active
+      color: white
+
+  ul
+    transition: opacity 0.2s
+    margin: 4px 0 0 5px
+    overflow: hidden
+    font-size: initial
+
+    li
+      display: block
+      float: left
+      width: auto
+      color: darken(white, 15%)
+      padding: 2px 5px 0
+
+      &.current
+        color: darken(white, 5%)
+
+      &:first-child .fa-home
+        margin-right: 5px
+
+      a.js-create-board
+        margin-left: 5px
+
+  #header-user-bar,
+  #header-new-board-icon
+    flex-shrink: 0
+
+  #header-user-bar
+    margin: 2px 0
+
+    .header-user-bar-avatar
+      float: left
+      position: relative
+      top: -5px
+      margin-right: 5px
+
+      .member
+        width: 24px
+        height: @width
+        margin: 0
+        margin-top: 1px
+
+    .header-user-bar-name
+      margin: 4px 8px 0 0
+      float: left
+
+      i.fa-chevron-down
+        margin-right: 4px
+
+  #header-new-board-icon
+    flex-grow: 1
+    margin: 6px 5px 0
+    width: 12px
+
+@media screen and (max-width: 800px)
+  #header
+    #header-main-bar
+      height: 40px
+
+      .board-header-btns
+        margin-top: 0px
+
+      .board-header-btn
+        height: 32px
+        line-height: @height
+        font-size: 16px
+
+        i.fa
+          line-height: 32px
+
+          + span
+            display: none
+
+  #header-quick-access
+    transition: background-color 0.4s
+    width: 100%
+    padding: 10px 0px
+    z-index: 30
+    position: absolute
+    bottom: 0px
+
+    ul
+      width: calc(100% - 150px)
+      overflow: ellipsis
+
+      li
+        height: 28px
+
+.offline-warning
+  width: 100%
+  text-align: center
+  padding: 0
+  margin: 0
+  background: #F8ECBD
+  clear: both
+
+  p
+    margin: 7px
+    padding: 0

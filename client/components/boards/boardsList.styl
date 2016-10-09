@@ -1,0 +1,154 @@
+@import 'nib'
+
+$spaceBetweenTiles = 16px
+
+.board-list
+  margin: 0 ($spaceBetweenTiles/2)
+
+  li
+    float: left
+    width: 25%
+    box-sizing: border-box
+    position: relative
+    background: 0
+
+    &.starred
+      .fa-star,
+      .fa-star-o
+        opacity: 1
+
+  .board-list-item
+    background-color: rgba(255, 255, 255, 0.3)
+    color: #6370a7
+    height: 100px
+    font-size: 18px
+    line-height: 22px
+    border-radius: 10px
+    display: block
+    font-weight: 700
+    min-height: 18px
+    padding: 8px
+    margin: ($spaceBetweenTiles/2)
+    position: relative
+    text-decoration: none
+
+    &.tile
+      background-size: auto
+      background-repeat: repeat
+  .board-list-item:hover
+      transform: translate3d(0,-5px,0);
+      box-shadow: 0 7px 21px rgba(0,0,0,.15);
+
+  .board-list-item-sub-name
+    color: rgba(255, 255, 255, .5)
+    display: block
+    font-size: 14px
+    font-weight: 400
+    line-height: 22px
+
+  .board-list-item-desc
+    color: #6370a7
+    text-indent: 2em
+    display: block
+    font-size: 14px
+    font-weight: 400
+    line-height: 18px
+    border-top: 2px solid #a9d2ef;
+
+  .js-add-board
+    text-align:center
+
+    .label
+      font-weight: normal
+      line-height:100px
+
+    :hover
+      background-color: white
+
+  .fa-star,
+  .fa-star-o
+    bottom: 0
+    font-size: 14px
+    height: 18px
+    line-height: 18px
+    padding: 9px 9px
+    position: absolute
+    right: 0
+    top: 0
+    transition-duration: .15s
+    transition-property: color, font-size, background
+
+  .is-star-active
+    color: gold
+
+  li:hover a
+    &:hover
+      .fa-star,
+      .fa-star-o
+        color: gold
+
+      &:hover
+        font-size: 18px
+        opacity: 1
+
+      &.is-star-active
+        opacity: 1
+
+.board-list .js-open-board
+  background-color: white
+
+.board-backgrounds-list
+
+  .board-background-select
+    box-sizing: border-box
+    display: block
+    float: left
+    width: 50%
+    padding-top: 12px
+    position: relative
+    z-index: 1
+
+    &:nth-child(-n + 2)
+      padding-top: 0
+
+    &:nth-child(2n)
+      padding-left: 6px
+
+    &:nth-child(2n+1)
+      padding-right: 6px
+
+    .background-box
+      border-radius: 3px
+      background-size: cover
+      display: block
+      height: 74px
+      position: relative
+      width: 100%
+      cursor: pointer
+      display: flex
+      align-items: center
+      justify-content: center
+
+      i.fa-check
+        font-size: 25px
+        color: white
+
+@media screen and (max-width: 800px)
+  .board-list
+    height: 100%
+    overflow: scroll
+
+    li
+      width: 33.3%
+
+    .board-list-item
+      overflow: hidden
+
+    .board-list-item-sub-name
+      position: relative
+      top: -100px
+      left: -100px
+
+@media screen and (max-width: 360px)
+    li
+      width: 50%

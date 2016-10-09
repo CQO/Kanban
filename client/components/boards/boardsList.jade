@@ -1,0 +1,46 @@
+template(name="boardList")
+  .htmleaf-container
+      .background
+        ul.bg-bubbles
+          li
+          li
+          li
+          li
+          li
+          li
+          li
+          li
+          li
+          li
+  .wrapper
+    ul.board-list.clearfix
+      each boards
+        li(class="{{#if isStarred}}starred{{/if}}" class=colorClass)
+          if isInvited
+            .board-list-item
+              span.details
+                span.board-list-item-name= title
+                i.fa.js-star-board(
+                  class="fa-star{{#if isStarred}} is-star-active{{else}}-o{{/if}}"
+                  title="{{_ 'star-board-title'}}")
+                p.board-list-item-desc {{_ 'just-invited'}}
+                button.js-accept-invite.primary {{_ 'accept'}}
+                button.js-decline-invite {{_ 'decline'}}
+          else
+            a.js-open-board.board-list-item(href="{{pathFor 'board' id=_id slug=slug}}")
+              span.details
+                span.board-list-item-name= title
+                i.fa.js-star-board(
+                  class="fa-star{{#if isStarred}} is-star-active{{else}}-o{{/if}}"
+                  title="{{_ 'star-board-title'}}")
+                p.board-list-item-desc= description
+      li.js-add-board
+        a.board-list-item.label {{_ 'add-board'}}
+
+
+template(name="boardListHeaderBar")
+  .board-header-btns.right
+    a.board-header-btn.js-open-archived-board
+      i.fa.fa-archive
+      span {{_ 'archives'}}
+    +headerUserBar
