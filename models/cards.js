@@ -135,7 +135,7 @@ Cards.helpers({
 
   absoluteUrl() {
     const board = this.board();
-    //return FlowRouter.url('card', { boardId: board._id,slug: board.slug, cardId: this._id,});
+    return FlowRouter.url('card', { boardId: board._id,slug: board.slug, cardId: this._id,});
     return board.slug + "/" + this._id;
   },
 });

@@ -13,7 +13,7 @@ Tracker.autorun(() => {
   else {
     const language = navigator.language || navigator.userLanguage;
     TAPi18n.setLanguage(language);
-    const shortLanguage = language.split('-')[0];
+    //本来是const shortLanguage = language.split('-')[0];然后T9n.setLanguage(shortLanguage);
     T9n.setLanguage(language);
   }
 });
