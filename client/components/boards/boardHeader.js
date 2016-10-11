@@ -69,7 +69,6 @@ BlazeComponent.extendComponent({
       },
       'click .js-open-board-menu': Popup.open('boardMenu'),
       'click .js-change-visibility': Popup.open('boardChangeVisibility'),
-      'click .js-watch-board': Popup.open('boardChangeWatch'),
       'click .js-open-filter-view'() { Sidebar.setView('filter'); },
       'click .js-filter-reset'(evt) {
         evt.stopPropagation();
