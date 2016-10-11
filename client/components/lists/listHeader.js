@@ -13,12 +13,6 @@ BlazeComponent.extendComponent({
     return list.findWatcher(Meteor.userId());
   },
 
-  events() {
-    return [{
-      'click .js-open-list-menu': Popup.open('listAction'),
-      submit: this.editTitle,
-    }];
-  },
 }).register('listHeader');
 
 Template.listActionPopup.helpers({

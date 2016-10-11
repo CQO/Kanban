@@ -160,13 +160,6 @@ Template.cardDetailsActionsPopup.events({
     Popup.close();
   },
   'click .js-more': Popup.open('cardMore'),
-  'click .js-toggle-watch-card'() {
-    const currentCard = this;
-    const level = currentCard.findWatcher(Meteor.userId()) ? null : 'watching';
-    Meteor.call('watch', 'card', currentCard._id, level, (err, ret) => {
-      if (!err && ret) Popup.close();
-    });
-  },
 });
 
 Template.editCardTitleForm.onRendered(function() {

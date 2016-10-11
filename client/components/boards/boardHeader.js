@@ -43,10 +43,6 @@ Template.boardChangeTitlePopup.events({
 });
 
 BlazeComponent.extendComponent({
-  watchLevel() {
-    const currentBoard = Boards.findOne(Session.get('currentBoard'));
-    return currentBoard && currentBoard.getWatchLevel(Meteor.userId());
-  },
 
   isStarred() {
     const boardId = Session.get('currentBoard');
