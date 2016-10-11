@@ -273,5 +273,7 @@
     "watching-info":"任何变化都将通知您",
     "tracking-info":"在卡片或者管理员变更时通知您",
     "muted-info":"你将不会收到任何提示消息",
-    "editNotificationPopup-title":"通知设置"
+    "editNotificationPopup-title":"通知设置",
+    "moveCardToTop-title":"移动到顶部",
+    "moveCardToBottom-title":"移动到底部"
     }
