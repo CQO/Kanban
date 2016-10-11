@@ -1,5 +1,9 @@
 // buffer each user's email text in a queue, then flush them in single email
 Meteor.startup(() => {
+  //设置邮件参数
+  process.env.MAIL_URL="smtp://send@owo.help:pbhyxbvurjcrcahc@smtp.qq.com:465";
+  Accounts.emailTemplates.from = 'my@owo.help';
+
   Notifications.subscribe('email', (user, title, description, params) => {
     // add quote to make titles easier to read in email text
     const quoteParams = _.clone(params);
