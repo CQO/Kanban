@@ -1,8 +1,5 @@
 Cards = new Mongo.Collection('cards');
 
-// XXX To improve pub/sub performances a card document should include a
-// de-normalized number of comments so we don't have to publish the whole list
-// of comments just to display the number of them in the board view.
 Cards.attachSchema(new SimpleSchema({
   title: {
     type: String,
@@ -144,18 +141,21 @@ Cards.helpers({
 });
 
 Cards.mutations({
+  //卡片归档函数
   archive() {
     return { $set: { archived: true }};
   },
-
+  //卡片还原归档函数
   restore() {
+    console.log("restore");
     return { $set: { archived: false }};
   },
-
+  //更改卡片标题的函数
   setTitle(title) {
+    console.log("setTitle");
     return { $set: { title }};
   },
-
+  //卡片更改描述函数
   setDescription(description) {
     return { $set: { description }};
   },
@@ -167,15 +167,15 @@ Cards.mutations({
     }
     return { $set: mutatedFields };
   },
-
+  //卡片增加标签
   addLabel(labelId) {
     return { $addToSet: { labelIds: labelId }};
   },
-
+  //卡片移除标签'
   removeLabel(labelId) {
     return { $pull: { labelIds: labelId }};
   },
-
+  //卡片 移除/增加 标签
   toggleLabel(labelId) {
     if (this.labelIds && this.labelIds.indexOf(labelId) > -1) {
       return this.removeLabel(labelId);
@@ -183,15 +183,15 @@ Cards.mutations({
       return this.addLabel(labelId);
     }
   },
-
+  //卡片增加成员
   assignMember(memberId) {
     return { $addToSet: { members: memberId }};
   },
-
+  //删除卡片协作成员
   unassignMember(memberId) {
     return { $pull: { members: memberId }};
   },
-
+  //卡片 移除/增加 标签
   toggleMember(memberId) {
     if (this.members && this.members.indexOf(memberId) > -1) {
       return this.unassignMember(memberId);
@@ -201,17 +201,18 @@ Cards.mutations({
   },
 
   setCover(coverId) {
+    console.log("setCover");
     return { $set: { coverId }};
   },
 
   unsetCover() {
+    console.log("unsetCover");
     return { $unset: { coverId: '' }};
   },
 });
 
 if (Meteor.isServer) {
-  // Cards are often fetched within a board, so we create an index to make these
-  // queries more efficient.
+  // 面板经常调用这些功能，所以我们创建索引，以使查询效率更高。
   Meteor.startup(() => {
     Cards._collection._ensureIndex({ boardId: 1 });
   });
@@ -264,7 +265,7 @@ if (Meteor.isServer) {
     }
   });
 
-  // Add a new activity if we add or remove a member to the card
+  //卡片状态发生改变的函数
   Cards.before.update((userId, doc, fieldNames, modifier) => {
     if (!_.contains(fieldNames, 'members'))
       return;
