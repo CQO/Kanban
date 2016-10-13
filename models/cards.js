@@ -129,7 +129,7 @@ Cards.helpers({
     // todo XXX we could return a default "upload pending" image in the meantime?
     return cover && cover.url() && cover;
   },
-
+  //获取绝对路径
   absoluteUrl() {
     const board = this.board();
     return FlowRouter.url('card', {
@@ -297,7 +297,7 @@ if (Meteor.isServer) {
     }
   });
 
-  // Remove all activities associated with a card if we remove the card
+  //删除所有与卡片相关联的活动
   Cards.after.remove((userId, doc) => {
     Activities.remove({
       cardId: doc._id,

@@ -237,26 +237,28 @@ Boards.helpers({
 });
 
 Boards.mutations({
+  //归档板块
   archive() {
     return { $set: { archived: true }};
   },
-
+  //恢复板块
   restore() {
+    console.log("restore");
     return { $set: { archived: false }};
   },
-
+  //更改板块标题
   rename(title) {
     return { $set: { title }};
   },
-
+  //更改板块描述
   setDesciption(description) {
     return { $set: {description} };
   },
-
+  //更改板块颜色
   setColor(color) {
     return { $set: { color }};
   },
-
+  //设置板块公开程度
   setVisibility(visibility) {
     return { $set: { permission: visibility }};
   },
@@ -266,6 +268,7 @@ Boards.mutations({
     // create another one because they would be indistinguishable in the UI
     // (they would still have different `_id` but that is not exposed to the
     // user).
+    console.log("addLabel");
     if (!this.getLabel(name, color)) {
       const _id = Random.id(6);
       return { $push: {labels: { _id, name, color }}};
@@ -274,6 +277,7 @@ Boards.mutations({
   },
 
   editLabel(labelId, name, color) {
+    console.log("editLabel");
     if (!this.getLabel(name, color)) {
       const labelIndex = this.labelIndex(labelId);
       return {
@@ -287,10 +291,12 @@ Boards.mutations({
   },
 
   removeLabel(labelId) {
+    console.log("removeLabel");
     return { $pull: { labels: { _id: labelId }}};
   },
-
+  //板块增加成员
   addMember(memberId) {
+    console.log("addMember");
     const memberIndex = this.memberIndex(memberId);
     if (memberIndex >= 0) {
       return {
@@ -310,10 +316,9 @@ Boards.mutations({
       },
     };
   },
-
+  //板块移除成员
   removeMember(memberId) {
     const memberIndex = this.memberIndex(memberId);
-
     // we do not allow the only one admin to be removed
     const allowRemove = (!this.members[memberIndex].isAdmin) || (this.activeAdmins().length > 1);
     if (!allowRemove) {
