@@ -77,6 +77,7 @@ Migrations.add('card-covers', () => {
   Attachments.update({}, {$unset: {cover: ''}}, noValidateMulti);
 });
 
+//用户更换看板颜色事件
 Migrations.add('use-css-class-for-boards-colors', () => {
   const associationTable = {
     '#27AE60': 'nephritis',

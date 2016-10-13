@@ -1,7 +1,6 @@
-// We use activities fields at two different places:
-// 1. The board sidebar
-// 2. The card activity tab
-// We use this publication to paginate for these two publications.
+// 我们在两个地方使用活动字段：
+// 1. 看板的侧边栏
+// 2. 卡片的标签
 
 Meteor.publish('activities', (kind, id, limit) => {
   check(kind, Match.Where((x) => {

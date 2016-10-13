@@ -177,11 +177,10 @@ Template.editCardTitleForm.events({
 
 Template.moveCardPopup.events({
   'click .js-select-list'() {
-    // XXX We should *not* get the currentCard from the global state, but
-    // instead from a “component” state.
+    //菜单里移动卡片的事件
     const card = Cards.findOne(Session.get('currentCard'));
     const newListId = this._id;
-    card.move(newListId);
+    card.move(newListId);//跳至models/cards.js里的函数move(listId, sortIndex)
     Popup.close();
   },
 });

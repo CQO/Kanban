@@ -159,7 +159,7 @@ Cards.mutations({
   setDescription(description) {
     return { $set: { description }};
   },
-
+  //移动卡片的函数
   move(listId, sortIndex) {
     const mutatedFields = { listId };
     if (sortIndex) {
@@ -215,7 +215,7 @@ if (Meteor.isServer) {
   Meteor.startup(() => {
     Cards._collection._ensureIndex({ boardId: 1 });
   });
-
+  //插入卡片服务端函数
   Cards.after.insert((userId, doc) => {
     Activities.insert({
       userId,
@@ -226,7 +226,7 @@ if (Meteor.isServer) {
     });
   });
 
-  // New activity for card (un)archivage
+  // 更改卡片标题所发生的函数
   Cards.after.update((userId, doc, fieldNames) => {
     if (_.contains(fieldNames, 'archived')) {
       if (doc.archived) {
@@ -249,7 +249,7 @@ if (Meteor.isServer) {
     }
   });
 
-  // New activity for card moves
+  // 移动卡片发生的事件
   Cards.after.update(function(userId, doc, fieldNames) {
     const oldListId = this.previous.listId;
     if (_.contains(fieldNames, 'listId') && doc.listId !== oldListId) {
