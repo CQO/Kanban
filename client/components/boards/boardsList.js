@@ -62,9 +62,13 @@ BlazeComponent.extendComponent({
         const targetBoard = this.currentData()._id;//目标板块的id
         const thisBoard = Boards.findOne(Session.get('currentBoard'));//目前板块
         //console.log(Lists.insert({ title: '收入项目', boardId: targetBoard }, { extendAutoValueContext: { userId: 'eFxXGteFtEjA3XCeH' } }));
-        console.log(Lists.find(targetBoard));
-        console.log(doc);
-        console.log(Session);
+        //console.log(Lists.find(targetBoard));
+        //console.log(doc);
+        //console.log(Session);
+        const la =Boards.find({archived: false,'members.userId': Meteor.userId(),}, {sort: ['title'],});
+        la.forEach(function(element) {
+          console.log(element);
+        }, this);
 
 
       },
