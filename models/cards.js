@@ -171,11 +171,7 @@ Cards.mutations({
   addLabel(labelId) {
     return { $addToSet: { labelIds: labelId }};
   },
-<<<<<<< HEAD
   //卡片移除标签
-=======
-  //卡片移除标签'
->>>>>>> cf49834e0a9802c06bcee76d814b6943fff4f3c9
   removeLabel(labelId) {
     return { $pull: { labelIds: labelId }};
   },
@@ -195,11 +191,7 @@ Cards.mutations({
   unassignMember(memberId) {
     return { $pull: { members: memberId }};
   },
-<<<<<<< HEAD
   //卡片 移除/增加 成员
-=======
-  //卡片 移除/增加 标签
->>>>>>> cf49834e0a9802c06bcee76d814b6943fff4f3c9
   toggleMember(memberId) {
     if (this.members && this.members.indexOf(memberId) > -1) {
       return this.unassignMember(memberId);
