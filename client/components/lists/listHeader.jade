@@ -24,6 +24,7 @@ template(name="listActionPopup")
   hr
   ul.pop-over-list
     li: a.js-close-list {{_ 'archive-list'}}
+    li: a.js-move-list {{_ 'move-list'}}
 
 template(name="boardLists")
   ul.pop-over-list
@@ -33,3 +34,6 @@ template(name="boardLists")
           a.disabled {{title}} ({{_ 'current'}})
         else
           a.js-select-list= title
+
+template(name="moveListPopup")
+  +boardCatalog

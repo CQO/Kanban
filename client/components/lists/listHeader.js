@@ -45,4 +45,5 @@ Template.listActionPopup.events({
     this.archive();
     Popup.close();
   },
+  'click .js-move-list': Popup.open('moveList'),
 });

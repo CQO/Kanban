@@ -206,7 +206,7 @@ class TrelloCreator {
       const cardToCreate = {
         archived: card.closed,
         boardId,
-        // very old boards won't have a creation activity so no creation date
+        // 非常旧的板块将不会有一个创建活动，所以没有创建日期
         createdAt: this._now(this.createdAt.cards[card.id]),
         dateLastActivity: this._now(),
         description: card.desc,

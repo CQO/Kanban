@@ -37,6 +37,13 @@ template(name="boardList")
       li.js-add-board
         a.board-list-item.label {{_ 'add-board'}}
 
+template(name="boardCatalog")
+  .wrapper
+    ul.board-list.clearfix
+      each boards
+        li(class="boardCatalog" id="{{pathFor 'board' id=_id }}"  class=colorClass)= title
+
+
 
 template(name="boardListHeaderBar")
   .board-header-btns.right

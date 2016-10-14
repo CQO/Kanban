@@ -58,6 +58,7 @@ Lists.allow({
 });
 
 Lists.helpers({
+  //在网页中显示卡片的函数
   cards() {
     return Cards.find(Filter.mongoSelector({
       listId: this._id,
@@ -75,14 +76,15 @@ Lists.helpers({
 });
 
 Lists.mutations({
+  //清单重命名函数
   rename(title) {
     return { $set: { title }};
   },
-
+  //清单归档函数
   archive() {
     return { $set: { archived: true }};
   },
-
+  //清单恢复函数
   restore() {
     return { $set: { archived: false }};
   },

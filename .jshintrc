@@ -1,0 +1,12 @@
+{
+  "esversion" : 6,
+
+  "bitwise":true,
+  "unused":true,
+  "latedef":true, //变量定义前禁止使用
+  "immed":true, //匿名函数调用
+  "eqeqeq": true, //强制使用三等号
+  "devel": true,
+  "-W117": false,
+  "predef": [ "require","Template","document","exports","module","BlazeComponent","Meteor","Boards","FlowRouter","Board","Session","evt","Popup" ]
+}
