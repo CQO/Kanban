@@ -296,7 +296,6 @@ Boards.mutations({
   },
   //板块增加成员
   addMember(memberId) {
-    console.log("addMember");
     const memberIndex = this.memberIndex(memberId);
     if (memberIndex >= 0) {
       return {
@@ -319,7 +318,7 @@ Boards.mutations({
   //板块移除成员
   removeMember(memberId) {
     const memberIndex = this.memberIndex(memberId);
-    // we do not allow the only one admin to be removed
+    // 板块中至少要有一个管理员
     const allowRemove = (!this.members[memberIndex].isAdmin) || (this.activeAdmins().length > 1);
     if (!allowRemove) {
       return {
@@ -340,7 +339,7 @@ Boards.mutations({
   setMemberPermission(memberId, isAdmin) {
     const memberIndex = this.memberIndex(memberId);
 
-    // do not allow change permission of self
+    // 不能自己给自己加权限
     if (memberId === Meteor.userId()) {
       isAdmin = this.members[memberIndex].isAdmin;
     }
@@ -370,7 +369,7 @@ if (Meteor.isServer) {
     fetch: [],
   });
 
-  // We can't remove a member if it is the last administrator
+  // 如果它是最后一个管理员，我们不能删除成员
   Boards.deny({
     update(userId, doc, fieldNames, modifier) {
       if (!_.contains(fieldNames, 'members'))
@@ -454,15 +453,13 @@ if (Meteor.isServer) {
     );
   });
 
-  // Add a new activity if we add or remove a member to the board
+  // 板块成员变动函数
   Boards.after.update((userId, doc, fieldNames, modifier) => {
     if (!_.contains(fieldNames, 'members')) {
       return;
     }
-
     let memberId;
-
-    // Say hello to the new member
+    // 增加新成员
     if (modifier.$push && modifier.$push.members) {
       memberId = modifier.$push.members.userId;
       Activities.insert({
@@ -474,7 +471,7 @@ if (Meteor.isServer) {
       });
     }
 
-    // Say goodbye to the former member
+    // 移除用户
     if (modifier.$pull && modifier.$pull.members) {
       memberId = modifier.$pull.members.userId;
       Activities.insert({

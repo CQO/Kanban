@@ -96,7 +96,7 @@ if (Meteor.isServer) {
   Meteor.startup(() => {
     Lists._collection._ensureIndex({ boardId: 1 });
   });
-
+  //添加清单函数
   Lists.after.insert((userId, doc) => {
     Activities.insert({
       userId,
@@ -106,7 +106,7 @@ if (Meteor.isServer) {
       listId: doc._id,
     });
   });
-
+  //归档清单函数
   Lists.after.update((userId, doc) => {
     if (doc.archived) {
       Activities.insert({

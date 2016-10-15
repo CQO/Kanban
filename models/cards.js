@@ -147,12 +147,10 @@ Cards.mutations({
   },
   //卡片还原归档函数
   restore() {
-    console.log("restore");
     return { $set: { archived: false }};
   },
   //更改卡片标题的函数
   setTitle(title) {
-    console.log("setTitle");
     return { $set: { title }};
   },
   //卡片更改描述函数
@@ -269,12 +267,12 @@ if (Meteor.isServer) {
     }
   });
 
-  //卡片状态发生改变的函数
+  //卡片添加移除的函数
   Cards.before.update((userId, doc, fieldNames, modifier) => {
     if (!_.contains(fieldNames, 'members'))
       return;
     let memberId;
-    // Say hello to the new member
+    // 卡片添加成员事件
     if (modifier.$addToSet && modifier.$addToSet.members) {
       memberId = modifier.$addToSet.members;
       if (!_.contains(doc.members, memberId)) {
@@ -288,7 +286,7 @@ if (Meteor.isServer) {
       }
     }
 
-    // Say goodbye to the former member
+    // 卡片移除成员事件
     if (modifier.$pull && modifier.$pull.members) {
       memberId = modifier.$pull.members;
       Activities.insert({
@@ -301,8 +299,9 @@ if (Meteor.isServer) {
     }
   });
 
-  //删除所有与卡片相关联的活动
+  //删除卡片以及所有与卡片相关联的活动
   Cards.after.remove((userId, doc) => {
+    console.log(doc);
     Activities.remove({
       cardId: doc._id,
     });
