@@ -2,7 +2,7 @@ BlazeComponent.extendComponent({
   mixins() {
     return [Mixins.PerfectScrollbar];
   },
-
+  //增加卡片事件
   openForm(options) {
     options = options || {};
     options.position = options.position || 'top';
@@ -16,7 +16,7 @@ BlazeComponent.extendComponent({
     }
     form.open();
   },
-
+  //增加卡片事件
   addCard(evt) {
     evt.preventDefault();
     const firstCardDom = this.find('.js-minicard:first');
@@ -61,14 +61,14 @@ BlazeComponent.extendComponent({
       formComponent.reset();
     }
   },
-
+  //移动卡片事件
   scrollToBottom() {
     const container = this.firstNode();
     $(container).animate({
       scrollTop: container.scrollHeight,
     });
   },
-
+  //点击卡片发生的事件
   clickOnMiniCard(evt) {
     if (MultiSelection.isActive() || evt.shiftKey) {
       evt.stopImmediatePropagation();
@@ -85,7 +85,7 @@ BlazeComponent.extendComponent({
       Utils.goBoardId(Session.get('currentBoard'));
     }
   },
-
+  //卡片被选择发生的事件
   cardIsSelected() {
     return Session.equals('currentCard', this.currentData()._id);
   },

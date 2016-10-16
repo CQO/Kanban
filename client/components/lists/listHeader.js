@@ -1,4 +1,5 @@
 BlazeComponent.extendComponent({
+  //编辑清单标题事件
   editTitle(evt) {
     evt.preventDefault();
     const newTitle = this.childComponents('inlinedForm')[0].getValue().trim();
@@ -6,11 +7,6 @@ BlazeComponent.extendComponent({
     if (newTitle) {
       list.rename(newTitle.trim());
     }
-  },
-
-  isWatching() {
-    const list = this.currentData();
-    return list.findWatcher(Meteor.userId());
   },
 
   events() {
@@ -21,12 +17,6 @@ BlazeComponent.extendComponent({
   },
 }).register('listHeader');
 
-Template.listActionPopup.helpers({
-  isWatching() {
-    return this.findWatcher(Meteor.userId());
-  },
-});
-
 Template.listActionPopup.events({
   'click .js-add-card'() {
     const listDom = document.getElementById(`js-list-${this._id}`);
@@ -34,12 +24,13 @@ Template.listActionPopup.events({
     listComponent.openForm({ position: 'top' });
     Popup.close();
   },
-  'click .js-list-subscribe'() {},
+  //选择所有卡片按钮点击事件
   'click .js-select-cards'() {
     const cardIds = this.allCards().map((card) => card._id);
     MultiSelection.add(cardIds);
     Popup.close();
   },
+  //归档按钮点击事件
   'click .js-close-list'(evt) {
     evt.preventDefault();
     this.archive();

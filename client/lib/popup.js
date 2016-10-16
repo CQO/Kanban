@@ -23,7 +23,7 @@ window.Popup = new class {
   ///   Template.tplName.events({
   ///     'click .elementClass': Popup.open("popupName"),
   ///   });
-  /// The popup inherit the data context of its parent.
+  /// 根据上下文弹出他的父级
     open(name) {
         const self = this;
         const popupName = `${name}Popup`;
@@ -31,6 +31,7 @@ window.Popup = new class {
             return $(evt.target).closest('.js-pop-over').length !== 0;
         }
         return function(evt) {
+            Session.set('call', this);
             // 如果一个弹出窗口已经打开，再次点击则会关闭它
             if (self.isOpen()) {
                 const previousOpenerElement = self._getTopStack().openerElement;

@@ -23,8 +23,6 @@ BlazeComponent.extendComponent({
     return [{
       'click .js-add-board': Popup.open('createBoard'),
       'click .js-star-board'(evt) {
-        console.log(this);
-        console.log(this.currentData()._id);
         const boardId = this.currentData()._id;
         Meteor.user().toggleBoardStar(boardId);
         evt.preventDefault();
@@ -60,17 +58,12 @@ BlazeComponent.extendComponent({
       //移动清单到其他板块
       'click .boardCatalog'(doc) {
         const targetBoard = this.currentData()._id;//目标板块的id
-        const thisBoard = Boards.findOne(Session.get('currentBoard'));//目前板块
-        //console.log(Lists.insert({ title: '收入项目', boardId: targetBoard }, { extendAutoValueContext: { userId: 'eFxXGteFtEjA3XCeH' } }));
-        //console.log(Lists.find(targetBoard));
-        //console.log(doc);
-        //console.log(Session);
-        const la =Boards.find({archived: false,'members.userId': Meteor.userId(),}, {sort: ['title'],});
-        la.forEach(function(element) {
-          console.log(element);
-        }, this);
-
-
+        const listsId = Session.get('call')._id;
+        const listTitle = Session.get('call').title;
+        const targetID =Lists.insert({ title: listTitle, boardId: targetBoard }, { extendAutoValueContext: { userId: 'eFxXGteFtEjA3XCeH' } })
+        Cards.find({ listId: listsId }).forEach((card) => {
+          card["move"](targetID);
+        });
       },
     }];
   },
