@@ -56,7 +56,7 @@ BlazeComponent.extendComponent({
   events() {
     return [{
       //移动清单到其他板块
-      'click .boardCatalog'(doc) {
+      'click .js-select-list'(doc) {
         const targetBoard = this.currentData()._id;//目标板块的id
         const listsId = Session.get('call')._id;
         const listTitle = Session.get('call').title;

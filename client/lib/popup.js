@@ -31,7 +31,8 @@ window.Popup = new class {
             return $(evt.target).closest('.js-pop-over').length !== 0;
         }
         return function(evt) {
-            Session.set('call', this);
+            // 把调用者传给Session的call
+            try {Session.set('call', this);}catch(err){}
             // 如果一个弹出窗口已经打开，再次点击则会关闭它
             if (self.isOpen()) {
                 const previousOpenerElement = self._getTopStack().openerElement;

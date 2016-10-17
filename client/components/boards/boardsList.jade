@@ -39,10 +39,10 @@ template(name="boardList")
 
 template(name="boardCatalog")
   .wrapper
-    ul.board-list.clearfix
+    ul.pop-over-list
       each boards
-        li(class="boardCatalog" id="{{pathFor 'board' id=_id }}"  class=colorClass)= title
-
+        li
+          a.js-select-list= title
 
 
 template(name="boardListHeaderBar")
