@@ -12,7 +12,6 @@ Meteor.publish('boards', function() {
   // format -- since the field is in the `profile` a user can modify it.
   const {starredBoards = []} = Users.findOne(this.userId).profile;
   check(starredBoards, [String]);
-
   return Boards.find({
     archived: false,
     $or: [
@@ -35,6 +34,7 @@ Meteor.publish('boards', function() {
     },
   });
 });
+
 
 Meteor.publish('archivedBoards', function() {
   if (!Match.test(this.userId, String))

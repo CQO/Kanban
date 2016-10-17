@@ -11,4 +11,16 @@ template(name="archivedBoards")
           | {{_ 'restore-board'}}
         = title
     else
+      li.no-items-message 没有已归档板块.
+
+template(name="worldBoards")
+  h2
+    i.fa.fa-archive
+    | {{_ 'worldBoards'}}
+
+  ul.archived-lists
+    each boards
+      li.archived-lists-item
+        a.js-open-board.board-list-item(href="{{pathFor 'board' id=_id slug=slug}}")=title
+    else
       li.no-items-message No archived board.

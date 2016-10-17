@@ -1,8 +1,7 @@
 
 BlazeComponent.extendComponent({
   boards() {
-    return Boards.find({
-      archived: false,
+    return Boards.find({archived: false,
       'members.userId': Meteor.userId(),
     }, {
       sort: ['title'],
@@ -43,6 +42,7 @@ BlazeComponent.extendComponent({
     }];
   },
 }).register('boardList');
+
 BlazeComponent.extendComponent({
   boards() {
     return Boards.find({

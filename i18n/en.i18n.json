@@ -302,5 +302,7 @@
     "what-to-do": "What do you want to do?",
     "super-admin":"Super admin",
     "archived-boards":"Archived Boards",
-    "restore-board":"Restore Board"
+    "restore-board":"Restore Board",
+    "world":"world",
+    "worldBoards":"worldBoards"
 }

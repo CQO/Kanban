@@ -2,6 +2,9 @@ Template.boardListHeaderBar.events({
   'click .js-open-archived-board'() {
     Modal.open('archivedBoards');
   },
+  'click .js-open-world-board'() {
+    Modal.open('worldBoards');
+  },
 });
 
 BlazeComponent.extendComponent({
@@ -25,3 +28,26 @@ BlazeComponent.extendComponent({
     }];
   },
 }).register('archivedBoards');
+
+BlazeComponent.extendComponent({
+  boards() {
+    return seach.find({
+      archived: false,
+      permission: "public",
+    }, {
+      sort: ['title'],
+    });
+  },
+
+  isStarred() {
+    const user = Meteor.user();
+    return user && user.hasStarred(this.currentData()._id);
+  },
+
+  isInvited() {
+    const user = Meteor.user();
+    return user && user.isInvitedTo(this.currentData()._id);
+  },
+
+}).register('worldBoards');
+
