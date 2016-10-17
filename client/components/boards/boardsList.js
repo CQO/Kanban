@@ -56,13 +56,13 @@ BlazeComponent.extendComponent({
   events() {
     return [{
       //移动清单到其他板块
-      'click .js-select-list'(doc) {
+      'click .js-select-list'() {
         const targetBoard = this.currentData()._id;//目标板块的id
         const listsId = Session.get('call')._id;
         const listTitle = Session.get('call').title;
-        const targetID =Lists.insert({ title: listTitle, boardId: targetBoard }, { extendAutoValueContext: { userId: 'eFxXGteFtEjA3XCeH' } })
+        const targetID = Lists.insert({ title: listTitle, boardId: targetBoard }, { extendAutoValueContext: { userId: 'eFxXGteFtEjA3XCeH' } });
         Cards.find({ listId: listsId }).forEach((card) => {
-          card["move"](targetID);
+          Cards.insert({title:card.title,members:[],labelIds:[],listId: targetID,boardId: targetBoard,sort: 4});
         });
       },
     }];
