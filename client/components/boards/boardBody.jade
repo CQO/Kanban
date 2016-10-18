@@ -18,8 +18,6 @@ template(name="boardBody")
       class="{{#if Sidebar.isOpen}}is-sibling-sidebar-open{{/if}}"
       class="{{#if MultiSelection.isActive}}is-multiselection-active{{/if}}"
       class="{{#if draggingActive.get}}is-dragging-active{{/if}}")
-      if showOverlay.get
-        .board-overlay
       .lists.js-lists
         each currentBoard.lists
           +list(this)

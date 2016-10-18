@@ -18,7 +18,6 @@ BlazeComponent.extendComponent({
 
   onCreated() {
     this.isLoaded = new ReactiveVar(false);
-    this.parentComponent().showOverlay.set(true);
     this.parentComponent().mouseHasEnterCardDetails = false;
     this.calculateNextPeak();
   },
@@ -56,10 +55,6 @@ BlazeComponent.extendComponent({
     if (!Utils.isMiniScreen()) this.scrollParentContainer();
   },
 
-  onDestroyed() {
-    this.parentComponent().showOverlay.set(false);
-  },
-
   events() {
     const events = {
       [`${CSSEvents.transitionend} .js-card-details`]() {
@@ -89,7 +84,6 @@ BlazeComponent.extendComponent({
       'click .js-add-members': Popup.open('cardMembers'),
       'click .js-add-labels': Popup.open('cardLabels'),
       'mouseenter .js-card-details'() {
-        this.parentComponent().showOverlay.set(true);
         this.parentComponent().mouseHasEnterCardDetails = true;
       },
     }];

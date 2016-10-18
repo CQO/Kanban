@@ -3,7 +3,6 @@ const subManager = new SubsManager();
 BlazeComponent.extendComponent({
   onCreated() {
     this.draggingActive = new ReactiveVar(false);
-    this.showOverlay = new ReactiveVar(false);
     this.isBoardReady = new ReactiveVar(false);
 
     // The pattern we use to manually handle data loading is described here:
@@ -59,14 +58,6 @@ BlazeComponent.extendComponent({
 
   events() {
     return [{
-      // XXX The board-overlay div should probably be moved to the parent
-      // component.
-      'mouseenter .board-overlay'() {
-        if (this.mouseHasEnterCardDetails) {
-          this.showOverlay.set(false);
-        }
-      },
-
       // Click-and-drag action
       'mousedown .board-canvas'(evt) {
         // Translating the board canvas using the click-and-drag action can
