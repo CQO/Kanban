@@ -216,10 +216,6 @@ if (Meteor.isServer) {
   });
   //插入卡片服务端函数
   Cards.after.insert((userId, doc) => {
-    //应要求标题为QA的清单插入卡片记录下来
-    if(Lists.findOne(doc.listId).title==="QA"){
-      console.log("QA:"+doc.title);
-    }
     Activities.insert({
       userId,
       activityType: 'createCard',
