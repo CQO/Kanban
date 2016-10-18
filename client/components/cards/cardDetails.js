@@ -54,7 +54,11 @@ BlazeComponent.extendComponent({
   onRendered() {
     if (!Utils.isMiniScreen()) this.scrollParentContainer();
   },
-
+  mousePos(){
+    //在可视位置显示卡片弹窗
+    if(event.clientY<window.screen.availHeight/2) return "margin-top: 0px;";
+    else return "margin-top: "+event.clientY+"px;";
+  },
   events() {
     const events = {
       [`${CSSEvents.transitionend} .js-card-details`]() {

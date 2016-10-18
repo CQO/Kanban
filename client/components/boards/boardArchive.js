@@ -14,7 +14,6 @@ BlazeComponent.extendComponent({
 
   archivedBoards() {
     return Boards.find({archived: true,
-
     }, {
       sort: ['title'],
     });
