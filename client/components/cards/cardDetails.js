@@ -54,11 +54,14 @@ BlazeComponent.extendComponent({
   onRendered() {
     if (!Utils.isMiniScreen()) this.scrollParentContainer();
   },
-  mousePos(){
+  //mousePos(){
     //在可视位置显示卡片弹窗
-    if(event.clientY<window.screen.availHeight/2) return "margin-top: 0px;";
-    else return "margin-top: "+event.clientY+"px;";
-  },
+    //卡片数列*40实现 很傻的方法
+    //let height = Cards.findOne(Session.get('currentCard')).sort;
+    //height = height*40-200;
+    //if(height<0) height=0;
+    //return "margin-top: "+height+"px;";
+  //},
   events() {
     const events = {
       [`${CSSEvents.transitionend} .js-card-details`]() {
