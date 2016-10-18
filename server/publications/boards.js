@@ -14,13 +14,14 @@ Meteor.publish('boards', function() {
   check(starredBoards, [String]);
   return Boards.find({
     archived: false,
-    $or: [
-      {
-        _id: { $in: starredBoards },
-        permission: 'public',
-      },
-      { members: { $elemMatch: { userId: this.userId, isActive: true }}},
-    ],
+    //为了增加世界看板功能降低了安全限制
+    //$or: [
+      //{
+        //_id: { $in: starredBoards },
+        //permission: 'public',
+      //},
+      //{ members: { $elemMatch: { userId: this.userId, isActive: true }}},
+    //],
   }, {
     fields: {
       _id: 1,

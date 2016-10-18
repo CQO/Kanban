@@ -31,7 +31,7 @@ BlazeComponent.extendComponent({
 
 BlazeComponent.extendComponent({
   boards() {
-    return seach.find({
+    return Boards.find({
       archived: false,
       permission: "public",
     }, {

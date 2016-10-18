@@ -15,7 +15,7 @@ template(name="archivedBoards")
 
 template(name="worldBoards")
   h2
-    i.fa.fa-archive
+    i.fa.fa-globe
     | {{_ 'worldBoards'}}
 
   ul.archived-lists
@@ -23,4 +23,4 @@ template(name="worldBoards")
       li.archived-lists-item
         a.js-open-board.board-list-item(href="{{pathFor 'board' id=_id slug=slug}}")=title
     else
-      li.no-items-message No archived board.
+      li.no-items-message 没有人公开看板.
