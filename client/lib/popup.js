@@ -171,7 +171,7 @@ window.Popup = new class {
           // 自动匹配合适的标题，如果没有找到返回Wekan
           const title = TAPi18n.__(translationKey);
           // 当浏览器窗口太小我们需要可以看到X按钮
-          const defaultTitle = Utils.isMiniScreen() ?  user.username : false;
+          const defaultTitle = Utils.isMiniScreen() ? '信源研发看板' : false;
           return title !== translationKey ? title : defaultTitle;
       };
    }
