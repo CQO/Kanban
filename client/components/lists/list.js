@@ -10,12 +10,13 @@ BlazeComponent.extendComponent({
     this.newCardFormIsVisible = new ReactiveVar(true);
   },
 
-  // jquery UI库是我目前发现最好的库. I
-
+  // 使用jqueryUI实现卡片拖放
   onRendered() {
     const boardComponent = this.parentComponent();
     const itemsSelector = '.js-minicard:not(.placeholder, .js-card-composer)';
     const $cards = this.$('.js-minicards');
+    //如果是手机就不使用卡片拖动功能
+    if(window.screen.width<800) return;
     $cards.sortable({
       connectWith: '.js-minicards',
       tolerance: 'pointer',
