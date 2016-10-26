@@ -6,14 +6,14 @@
 meteor-base@1.0.4
 
 # Build system
-ecmascript@0.5.8_1
-stylus@2.513.5_1
-standard-minifier-css@1.2.0_1
-standard-minifier-js@1.2.0_1
+ecmascript@0.5.9
+stylus@2.513.6
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
 mquandalle:jade
 
 # Polyfills
-es5-shim@4.6.14_1
+es5-shim@4.6.15
 
 # Collections
 aldeed:collection2
@@ -24,25 +24,25 @@ dburles:collection-helpers
 idmontie:migrations
 matb33:collection-hooks
 matteodem:easy-search
-mongo@1.1.13
+mongo@1.1.14
 mquandalle:collection-mutations
 
 # Account system
-accounts-password@1.3.0
-service-configuration@1.0.10
+accounts-password@1.3.1
+service-configuration@1.0.11
 useraccounts:core
 useraccounts:unstyled
 useraccounts:flow-routing
-email@1.1.17_1
+email@1.1.18
 
 # Utilities
-check@1.2.3
-jquery@1.11.9
+check@1.2.4
+jquery@1.11.10
 random@1.0.10
 reactive-dict@1.1.8
-session@1.1.6
-tracker@1.1.0
-underscore@1.0.9
+session@1.1.7
+tracker@1.1.1
+underscore@1.0.10
 3stack:presence
 alethes:pages
 arillo:flow-router-helpers
@@ -60,7 +60,7 @@ tap:i18n
 
 # UI components
 blaze@2.1.8
-reactive-var@1.0.10
+reactive-var@1.0.11
 fortawesome:fontawesome
 mousetrap:mousetrap
 mquandalle:jquery-textcomplete
@@ -74,4 +74,4 @@ templates:tabs
 verron:autosize
 simple:json-routes
 mquandalle:moment
-shell-server
+shell-server@0.2.1
