@@ -20,6 +20,7 @@
     "eslint": "^2.0.0"
   },
   "dependencies": {
+    "bcrypt": "^0.8.7",
     "xss": "^0.2.13"
   }
 }
