@@ -36,7 +36,7 @@
     "archive-all": "全部归档",
     "archive-board": "归档看板",
     "archive-card": "归档卡片",
-    "archive-list": "归档该清单",
+    "archive-list": "归档清单",
     "archive-selection": "归档所选内容",
     "archiveBoardPopup-title": "确定要归档看板吗？",
     "archived-items": "已归档项目",
@@ -182,7 +182,7 @@
     "list-archive-cards": "归档清单中的所有卡片",
     "list-archive-cards-pop": "这将会从本看板中移除该清单中的所有卡片。如果需要浏览已归档的卡片并且将其恢复至看板，请点击\"菜单\">\"回收箱\"",
     "list-move-cards": "移动清单中的所有卡片",
-    "list-select-cards": "选择清单中的所有卡片",
+    "list-select-cards": "选择清单中所有卡片",
     "listActionPopup-title": "清单操作",
     "listImportCardPopup-title": "导入 Trello 卡片",
     "lists": "清单",
@@ -277,6 +277,7 @@
     "moveCardToTop-title":"移动到顶部",
     "moveCardToBottom-title":"移动到底部",
     "move-list":"移动清单",
-    "world":"世界看板",
-    "worldBoards":"世界看板"
+    "world":"公开看板",
+    "worldBoards":"公开看板",
+    "rename-list":"重命名清单"
     }

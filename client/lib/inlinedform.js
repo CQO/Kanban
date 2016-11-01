@@ -49,7 +49,6 @@ InlinedForm = BlazeComponent.extendComponent({
 
   events() {
     return [{
-      'click .js-close-inlined-form': this.close,
       'click .js-open-inlined-form': this.open,
 
       // Pressing Ctrl+Enter should submit the form

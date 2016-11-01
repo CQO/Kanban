@@ -40,15 +40,26 @@
     .list-name-input
       background: white
       margin: -3px 0 8px
-
 .list-header
   flex: 0 0 auto
   margin: 8px 12px 3px
   position: relative
   min-height: 20px
+  max-height: 34px
+  .inlined-form
+    .fa-check
+      background: rgba(255, 255, 255, 0)
+      font-size: 18px
+      padding: 0
+      margin: 0
+      line-height: 0
+      position: relative
+      bottom: 42px
+      right: 6px
+      float: right
 
   &.ui-sortable-handle
-    cursor: grab
+    float: left
 
   .list-header-name
     display: inline

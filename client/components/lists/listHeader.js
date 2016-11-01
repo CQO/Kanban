@@ -18,12 +18,14 @@ BlazeComponent.extendComponent({
 }).register('listHeader');
 
 Template.listActionPopup.events({
+  //添加新卡片事件
   'click .js-add-card'() {
     const listDom = document.getElementById(`js-list-${this._id}`);
     const listComponent = BlazeComponent.getComponentForElement(listDom);
     listComponent.openForm({ position: 'top' });
     Popup.close();
   },
+
   //选择所有卡片按钮点击事件
   'click .js-select-cards'() {
     const cardIds = this.allCards().map((card) => card._id);

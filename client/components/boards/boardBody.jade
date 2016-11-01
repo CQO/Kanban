@@ -33,8 +33,7 @@ template(name="addListForm")
         +inlinedForm(autoclose=false)
           input.list-name-input.full-line(type="text" placeholder="{{_ 'add-list'}}"
             autocomplete="off" autofocus)
-          .edit-controls.clearfix
-            button.primary.confirm(type="submit") {{_ 'save'}}
+          button.fa.fa-check(type="submit")
         else
           a.open-list-composer.js-open-inlined-form
             i.fa.fa-plus

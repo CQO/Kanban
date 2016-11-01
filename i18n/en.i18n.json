@@ -304,5 +304,6 @@
     "archived-boards":"Archived Boards",
     "restore-board":"Restore Board",
     "world":"world",
-    "worldBoards":"worldBoards"
+    "worldBoards":"worldBoards",
+    "rename-list":"rename-list"
 }

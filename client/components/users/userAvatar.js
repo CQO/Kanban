@@ -95,7 +95,6 @@ BlazeComponent.extendComponent({
       },
       'change .js-upload-avatar-input'(evt) {
         let file, fileUrl;
-
         FS.Utility.eachFile(evt, (f) => {
           try {
             file = Avatars.insert(new FS.File(f));
@@ -115,7 +114,7 @@ BlazeComponent.extendComponent({
                 window.clearInterval(fetchAvatarInterval);
               },
             });
-          }, 100);
+          }, 1000);
         }
       },
       'click .js-select-avatar'() {
