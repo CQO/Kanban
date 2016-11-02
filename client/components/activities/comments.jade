@@ -6,4 +6,4 @@ template(name="commentForm")
       +editor(class="js-new-comment-input")
         | {{getUnsavedValue 'cardComment' currentCard._id}}
       .add-controls
-        button.primary.confirm.clear.js-add-comment(type="submit") {{_ 'comment'}}
+        button.fa.fa-paper-plane(type="submit")
