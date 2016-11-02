@@ -24,7 +24,7 @@ Template.userFormsLayout.helpers({
 
   isCurrentLanguage() {
     const t9nTag = i18nTagToT9n(this.tag);
-    const curLang = T9n.getLanguage() || 'zh-CN';
+    const curLang = T9n.getLanguage().replace("_","-") || 'zh-CN';
     return t9nTag === curLang;
   },
 });

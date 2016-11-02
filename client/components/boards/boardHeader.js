@@ -6,7 +6,6 @@ Template.boardMenuPopup.events({
   },
   'click .js-change-board-color': Popup.open('boardChangeColor'),
   'click .js-rename-board': Popup.open('boardChangeTitle'),
-  'click .js-change-language': Popup.open('changeLanguage'),
   'click .js-archive-board ': Popup.afterConfirm('archiveBoard', function() {
     const currentBoard = Boards.findOne(Session.get('currentBoard'));
     currentBoard.archive();

@@ -3,15 +3,16 @@
 // 它来自浏览器默认的信息，默认语言为英语
 
 Tracker.autorun(() => {
+  T9n.setLanguage("zh-CN");
+  TAPi18n.setLanguage("zh-CN");
   const currentUser = Meteor.user();
   if (currentUser&&currentUser.profile&& currentUser.profile.language) {
     const language = currentUser.profile && currentUser.profile.language;
     TAPi18n.setLanguage(language);
-    const shortLanguage = language.split('-')[0];
     T9n.setLanguage(language);
   }
   else {
-    const language = navigator.language || navigator.userLanguage;
+    let language = navigator.language || navigator.userLanguage;
     TAPi18n.setLanguage(language);
     const shortLanguage = language.split('-')[0]+"-"+ language.split('-')[1].toUpperCase();
     T9n.setLanguage(shortLanguage);
