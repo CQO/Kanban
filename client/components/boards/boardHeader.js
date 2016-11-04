@@ -61,11 +61,7 @@ BlazeComponent.extendComponent({
 
   events() {
     return [{
-
       'click .js-edit-board-title': Popup.open('boardChangeTitle'),
-      'click .js-star-board'() {
-        Meteor.user().toggleBoardStar(Session.get('currentBoard'));
-      },
       'click .js-open-board-menu': Popup.open('boardMenu'),
       'click .js-change-visibility': Popup.open('boardChangeVisibility'),
       'click .js-open-filter-view'() { Sidebar.setView('filter'); },

@@ -179,6 +179,7 @@ Users.helpers({
 });
 
 Users.mutations({
+  //给板块加星函数
   toggleBoardStar(boardId) {
     const queryKind = this.hasStarred(boardId) ? '$pull' : '$addToSet';
     return {

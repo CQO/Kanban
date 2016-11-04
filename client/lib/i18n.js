@@ -3,8 +3,6 @@
 // 它来自浏览器默认的信息，默认语言为英语
 
 Tracker.autorun(() => {
-  T9n.setLanguage("zh-CN");
-  TAPi18n.setLanguage("zh-CN");
   const currentUser = Meteor.user();
   if (currentUser&&currentUser.profile&& currentUser.profile.language) {
     const language = currentUser.profile && currentUser.profile.language;
@@ -16,5 +14,10 @@ Tracker.autorun(() => {
     TAPi18n.setLanguage(language);
     const shortLanguage = language.split('-')[0]+"-"+ language.split('-')[1].toUpperCase();
     T9n.setLanguage(shortLanguage);
+  }
+  //如果获取异常 设置语言为中文
+  if(!TAPi18n.getLanguages()){
+    T9n.setLanguage("zh-CN");
+    TAPi18n.setLanguage("zh-CN");
   }
 });

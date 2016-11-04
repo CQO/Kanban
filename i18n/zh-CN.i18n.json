@@ -120,7 +120,7 @@
     "discard": "放弃",
     "done": "完成",
     "download": "下载",
-    "edit": "编辑",
+    "edit": "添加描述",
     "edit-avatar": "更改头像",
     "edit-profile": "编辑资料",
     "editLabelPopup-title": "更改标签",
@@ -279,5 +279,6 @@
     "move-list":"移动清单",
     "world":"公开看板",
     "worldBoards":"公开看板",
-    "rename-list":"重命名清单"
+    "rename-list":"重命名清单",
+    "app-is-offline":"和服务器链接中断，请保存重要内容，服务器恢复时页面会自动刷新。"
     }
