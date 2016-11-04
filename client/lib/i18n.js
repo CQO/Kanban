@@ -15,9 +15,4 @@ Tracker.autorun(() => {
     const shortLanguage = language.split('-')[0]+"-"+ language.split('-')[1].toUpperCase();
     T9n.setLanguage(shortLanguage);
   }
-  //如果获取异常 设置语言为中文
-  if(!TAPi18n.getLanguages()){
-    T9n.setLanguage("zh-CN");
-    TAPi18n.setLanguage("zh-CN");
-  }
 });

@@ -8,7 +8,6 @@ const i18nTagToT9n = (i18nTag) => {
 Template.userFormsLayout.onRendered(() => {
   const i18nTag = navigator.language;
   if (i18nTag) {
-    console.log("sd");
     T9n.setLanguage(i18nTagToT9n(i18nTag));
   }
   EscapeActions.executeAll();
