@@ -41,10 +41,10 @@ template(name="cardDetails")
         +editor(autofocus=true)
           | {{getUnsavedValue 'cardDescription' _id description}}
         .edit-controls.clearfix
-          button.primary(type="submit") {{_ 'save'}}
-          a.fa.fa-times-thin.js-close-inlined-form
+          button.fa.fa-check.primary(type="submit")
+          a.fa.fa-times.js-close-inlined-form
       else
-        a.fa.fa-pencil.js-open-inlined-form
+        a.js-open-inlined-form.comment-form
           if description
             +viewer
               = description
@@ -53,7 +53,7 @@ template(name="cardDetails")
         if (hasUnsavedValue 'cardDescription' _id)
           p.quiet
             | {{_ 'unsaved-description'}}
-            a.fa.fa-pencil.js-open-inlined-form {{_ 'view-it'}}
+            a.js-open-inlined-form {{_ 'view-it'}}
             = ' - '
             a.js-close-inlined-form {{_ 'discard'}}
     else if description

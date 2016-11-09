@@ -17,10 +17,29 @@
 
   .card-details-canvas
     width: 470px
-    .js-open-inlined-form
+    .comment-form
+      display: block
+      line-height: 20px
+      background-color: #ece5e5
+      border-radius: 5px
+      padding: 4px 10px 1px 10px
       .viewer
         p
-          font-size:larger;
+          font-size:medium
+    .edit-controls
+      float: right
+      font-size: 20px
+      .fa
+        position: relative
+        &:hover,&:focus
+          color:#94bd3b
+      .primary
+        right: 32px
+      .js-close-inlined-form
+        left: 31px
+        top: 7px
+
+
 
   .card-details-header
     margin: 0 -20px 9px
