@@ -5,14 +5,14 @@
 
 meteor-base@1.0.4
 
-# Build system
+# 构建系统
 ecmascript@0.5.9
 stylus@2.513.6
 standard-minifier-css@1.3.2
 standard-minifier-js@1.2.1
 mquandalle:jade
 
-# Polyfills
+# ES5兼容库
 es5-shim@4.6.15
 
 # Collections
@@ -27,7 +27,7 @@ matteodem:easy-search
 mongo@1.1.14
 mquandalle:collection-mutations
 
-# Account system
+# 账户系统
 accounts-password@1.3.1
 service-configuration@1.0.11
 useraccounts:core
@@ -35,7 +35,7 @@ useraccounts:unstyled
 useraccounts:flow-routing
 email@1.1.18
 
-# Utilities
+# 实用工具
 check@1.2.4
 jquery@1.11.10
 random@1.0.10
@@ -58,7 +58,7 @@ ongoworks:speakingurl
 raix:handlebar-helpers
 tap:i18n
 
-# UI components
+# UI组件
 blaze@2.1.8
 reactive-var@1.0.11
 fortawesome:fontawesome
