@@ -44,4 +44,5 @@ if (Meteor.isServer) {
     Activities._collection._ensureIndex({ boardId: 1, createdAt: -1 });
   });
 
+
 }

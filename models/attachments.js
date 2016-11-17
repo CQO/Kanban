@@ -1,13 +1,12 @@
+//设置上传附件方式是分段？
 Attachments = new FS.Collection('attachments', {
   stores: [
-
-    // XXX Add a new store for cover thumbnails so we don't load big images in
-    // the general board view
     new FS.Store.GridFS('attachments'),
   ],
 });
 
 if (Meteor.isServer) {
+  //附件权限
   Attachments.allow({
     insert(userId, doc) {
       return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
@@ -18,24 +17,12 @@ if (Meteor.isServer) {
     remove(userId, doc) {
       return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
     },
-    // We authorize the attachment download either:
-    // - if the board is public, everyone (even unconnected) can download it
-    // - if the board is private, only board members can download it
-    //
-    // XXX We have a bug with the `userId` verification:
-    //
-    //   https://github.com/CollectionFS/Meteor-CollectionFS/issues/449
-    //
+    // - 如果板块是开放的，那么任何人都可以下载附件
+    // - 如果板块是私密的，那么只有板块成员可以下载附件
     download(userId, doc) {
-      const query = {
-        $or: [
-          { 'members.userId': userId },
-          { permission: 'public' },
-        ],
-      };
+      const query = {$or: [{ 'members.userId': userId },{ permission: 'public' },],};
       return Boolean(Boards.findOne(doc.boardId, query));
     },
-
     fetch: ['boardId'],
   });
 }
@@ -45,15 +32,7 @@ if (Meteor.isServer) {
 Attachments.files.before.insert((userId, doc) => {
   const file = new FS.File(doc);
   doc.userId = userId;
-
-  // If the uploaded document is not an image we need to enforce browser
-  // download instead of execution. This is particularly important for HTML
-  // files that the browser will just execute if we don't serve them with the
-  // appropriate `application/octet-stream` MIME header which can lead to user
-  // data leaks. I imagine other formats (like PDF) can also be attack vectors.
-  // See https://github.com/wekan/wekan/issues/99
-  // XXX Should we use `beforeWrite` option of CollectionFS instead of
-  // collection-hooks?
+  //上传的附件类型如果不是图片那么设置文件类型为二进制流
   if (!file.isImage()) {
     file.original.type = 'application/octet-stream';
   }
