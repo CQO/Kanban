@@ -210,11 +210,11 @@ Boards.helpers({
   memberIndex(memberId) {
     return _.pluck(this.members, 'userId').indexOf(memberId);
   },
-
+  //判断用户是否为成员
   hasMember(memberId) {
     return !!_.findWhere(this.members, {userId: memberId, isActive: true});
   },
-
+  //判断用户是否为管理员
   hasAdmin(memberId) {
     return !!_.findWhere(this.members, {userId: memberId, isActive: true, isAdmin: true});
   },
