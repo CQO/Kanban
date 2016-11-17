@@ -34,14 +34,17 @@ CardComments.attachSchema(new SimpleSchema({
     },
   },
 }));
-
+//卡片评论的权限
 CardComments.allow({
+  //新增评论
   insert(userId, doc) {
     return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
   },
+  //更新评论
   update(userId, doc) {
     return userId === doc.userId;
   },
+  //删除评论
   remove(userId, doc) {
     return userId === doc.userId;
   },
@@ -57,6 +60,7 @@ CardComments.helpers({
 CardComments.hookOptions.after.update = { fetchPrevious: false };
 
 if (Meteor.isServer) {
+  //在活动上记录下添加评论这一条信息
   CardComments.after.insert((userId, doc) => {
     Activities.insert({
       userId,
@@ -66,7 +70,7 @@ if (Meteor.isServer) {
       commentId: doc._id,
     });
   });
-
+  //删除评论同时也删掉活动记录信息
   CardComments.after.remove((userId, doc) => {
     const activity = Activities.findOne({ commentId: doc._id });
     if (activity) {

@@ -6,13 +6,7 @@ Boards.attachSchema(new SimpleSchema({
   },
   slug: {
     type: String,
-    autoValue() { // eslint-disable-line consistent-return
-      // XXX We need to improve slug management. Only the id should be necessary
-      // to identify a board in the code.
-      // XXX If the board title is updated, the slug should also be updated.
-      // In some cases (Chinese and Japanese for instance) the `getSlug` function
-      // return an empty string. This is causes bugs in our application so we set
-      // a default slug in this case.
+    autoValue() {
       if (this.isInsert && !this.isSet) {
         let slug = 'board';
         const title = this.field('title');
@@ -148,33 +142,21 @@ Boards.attachSchema(new SimpleSchema({
 
 
 Boards.helpers({
-  /**
-   * Is supplied user authorized to view this board?
-   */
+  //板块访问规则
+  //任何人都可以访问公开看板
+  //必须是板块内成员才可以访问私密看板
   isVisibleBy(user) {
-    if(this.isPublic()) {
-      // public boards are visible to everyone
-      return true;
-    } else {
-      // otherwise you have to be logged-in and active member
-      return user && this.isActiveMember(user._id);
-    }
+    if(this.isPublic()) {return true;}
+    else {return user && this.isActiveMember(user._id);}
   },
 
-  /**
-   * Is the user one of the active members of the board?
-   *
-   * @param userId
-   * @returns {boolean} the member that matches, or undefined/false
-   */
+  //判断用户是否为板块成员
   isActiveMember(userId) {
-    if(userId) {
-      return this.members.find((member) => (member.userId === userId && member.isActive));
-    } else {
-      return false;
-    }
+    if(userId) {return this.members.find((member) => (member.userId === userId && member.isActive));}
+    else {return false;}
   },
 
+  //判断板块是否为公开
   isPublic() {
     return this.permission === 'public';
   },
@@ -182,31 +164,31 @@ Boards.helpers({
   lists() {
     return Lists.find({ boardId: this._id, archived: false }, { sort: { sort: 1 }});
   },
-
+  //返回板块活动
   activities() {
     return Activities.find({ boardId: this._id }, { sort: { createdAt: -1 }});
   },
-
+  //返回板块成员
   activeMembers() {
     return _.where(this.members, {isActive: true});
   },
-
+  //返回板块管理员
   activeAdmins() {
     return _.where(this.members, {isActive: true, isAdmin: true});
   },
-
+  //返回板块成员
   memberUsers() {
     return Users.find({ _id: {$in: _.pluck(this.members, 'userId')} });
   },
-
+  //返回板块标签信息
   getLabel(name, color) {
     return _.findWhere(this.labels, { name, color });
   },
-
+  //返回板块标签索引
   labelIndex(labelId) {
     return _.pluck(this.labels, '_id').indexOf(labelId);
   },
-
+  //返回板块成员索引
   memberIndex(memberId) {
     return _.pluck(this.members, 'userId').indexOf(memberId);
   },
@@ -218,7 +200,7 @@ Boards.helpers({
   hasAdmin(memberId) {
     return !!_.findWhere(this.members, {userId: memberId, isActive: true, isAdmin: true});
   },
-
+  //返回板块地址
   absoluteUrl() {
     return FlowRouter.url('board', { id: this._id, slug: this.slug });
   },
@@ -263,22 +245,17 @@ Boards.mutations({
   setVisibility(visibility) {
     return { $set: { permission: visibility }};
   },
-
+  //创建标签事件
   addLabel(name, color) {
-    // If label with the same name and color already exists we don't want to
-    // create another one because they would be indistinguishable in the UI
-    // (they would still have different `_id` but that is not exposed to the
-    // user).
-    console.log("addLabel");
+    //拒绝增加相同颜色并且名称相同的标签
     if (!this.getLabel(name, color)) {
       const _id = Random.id(6);
       return { $push: {labels: { _id, name, color }}};
     }
     return {};
   },
-
+  //更改标签名称事件
   editLabel(labelId, name, color) {
-    console.log("editLabel");
     if (!this.getLabel(name, color)) {
       const labelIndex = this.labelIndex(labelId);
       return {
@@ -290,7 +267,7 @@ Boards.mutations({
     }
     return {};
   },
-
+  //删除标签事件
   removeLabel(labelId) {
     console.log("removeLabel");
     return { $pull: { labels: { _id: labelId }}};
@@ -339,7 +316,6 @@ Boards.mutations({
   //设置成员权限
   setMemberPermission(memberId, isAdmin) {
     const memberIndex = this.memberIndex(memberId);
-
     // 不能自己给自己加权限
     if (memberId === Meteor.userId()) {
       isAdmin = this.members[memberIndex].isAdmin;
@@ -354,6 +330,7 @@ Boards.mutations({
 });
 
 if (Meteor.isServer) {
+  //板块操作权限
   Boards.allow({
     insert: Meteor.userId,
     update: allowIsBoardAdmin,
@@ -376,17 +353,16 @@ if (Meteor.isServer) {
       if (!_.contains(fieldNames, 'members'))
         return false;
 
-      // We only care in case of a $pull operation, ie remove a member
+      // 我们只关心拉取操作？
       if (!_.isObject(modifier.$pull && modifier.$pull.members))
         return false;
 
-      // If there is more than one admin, it's ok to remove anyone
+      // 如果管理员数量>1，他可以删除所有人
       const nbAdmins = _.where(doc.members, {isActive: true, isAdmin: true}).length;
       if (nbAdmins > 1)
         return false;
 
-      // If all the previous conditions were verified, we can't remove
-      // a user if it's an admin
+      // 不能删除一个管理员用户
       const removedMemberId = modifier.$pull.members.userId;
       return Boolean(_.findWhere(doc.members, {
         userId: removedMemberId,
@@ -413,7 +389,7 @@ if (Meteor.isServer) {
 }
 
 if (Meteor.isServer) {
-  // Let MongoDB ensure that a member is not included twice in the same board
+  // 防止一个个板块有两个相同的人
   Meteor.startup(() => {
     Boards._collection._ensureIndex({
       _id: 1,
@@ -432,8 +408,7 @@ if (Meteor.isServer) {
     });
   });
 
-  // If the user remove one label from a board, we cant to remove reference of
-  // this label in any card of this board.
+  // 如果有人删除一个标签，那么在所有板块上移除这个标签？
   Boards.after.update((userId, doc, fieldNames, modifier) => {
     if (!_.contains(fieldNames, 'labels') ||
       !modifier.$pull ||

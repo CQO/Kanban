@@ -69,13 +69,17 @@ Cards.attachSchema(new SimpleSchema({
   },
 }));
 
+//卡片权限管理
 Cards.allow({
+  //添加新卡片
   insert(userId, doc) {
     return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
   },
+  //更新卡片
   update(userId, doc) {
     return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
   },
+  //删除卡片
   remove(userId, doc) {
     return allowIsBoardMember(userId, Boards.findOne(doc.boardId));
   },
