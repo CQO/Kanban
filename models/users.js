@@ -166,7 +166,7 @@ Users.helpers({
       return this.username[0].toUpperCase();
     }
   },
-
+  //根据UserID获取用户名
   getName() {
     const profile = this.profile || {};
     return profile.fullname || this.username;

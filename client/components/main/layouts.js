@@ -7,6 +7,7 @@ const i18nTagToT9n = (i18nTag) => {
 
 Template.userFormsLayout.onRendered(() => {
   const i18nTag = navigator.language;
+  console.log(i18nTag);
   if (i18nTag) {
     T9n.setLanguage(i18nTagToT9n(i18nTag));
   }

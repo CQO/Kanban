@@ -1,5 +1,3 @@
-Meteor.absoluteUrl.defaultOptions.rootUrl = "http://192.168.134.252/";
-
 const DateString = Match.Where(function (dateAsString) {
   check(dateAsString, String);
   return moment(dateAsString, moment.ISO_8601).isValid();

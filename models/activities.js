@@ -1,3 +1,5 @@
+//设置网站根URL
+Meteor.absoluteUrl.defaultOptions.rootUrl = "http://192.168.134.252/";
 //创建一个数据库
 Activities = new Mongo.Collection('activities');
 
@@ -42,52 +44,4 @@ if (Meteor.isServer) {
     Activities._collection._ensureIndex({ boardId: 1, createdAt: -1 });
   });
 
-  Activities.after.insert((userId, doc) => {
-    const activity = Activities._transform(doc);
-    let participants = [];
-    let title = 'act-activity-notify';
-    let board = null;
-    const description = `act-${activity.activityType}`;
-    const params = {
-      activityId: activity._id,
-    };
-    if (activity.userId) {
-      // No need send notification to user of activity
-      // participants = _.union(participants, [activity.userId]);
-      params.user = activity.user().getName();
-    }
-    if (activity.boardId) {
-      board = activity.board();
-      params.board = board.title;
-      title = 'act-withBoardTitle';
-      params.url = board.absoluteUrl();
-    }
-    if (activity.memberId) {
-      participants = _.union(participants, [activity.memberId]);
-      params.member = activity.member().getName();
-    }
-    if (activity.listId) {
-      const list = activity.list();
-      params.list = list.title;
-    }
-    if (activity.oldListId) {
-      const oldList = activity.oldList();
-      params.oldList = oldList.title;
-    }
-    if (activity.cardId) {
-      const card = activity.card();
-      participants = _.union(participants, [card.userId], card.members || []);
-      params.card = card.title;
-      title = 'act-withCardTitle';
-      params.url = card.absoluteUrl();
-    }
-    if (activity.commentId) {
-      const comment = activity.comment();
-      params.comment = comment.text;
-    }
-    if (activity.attachmentId) {
-      const attachment = activity.attachment();
-      params.attachment = attachment._id;
-    }
-  });
 }

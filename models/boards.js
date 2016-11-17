@@ -222,7 +222,7 @@ Boards.helpers({
   absoluteUrl() {
     return FlowRouter.url('board', { id: this._id, slug: this.slug });
   },
-
+  //返回当前板块设置颜色
   colorClass() {
     return `board-color-${this.color}`;
   },
@@ -231,6 +231,7 @@ Boards.helpers({
   // XXX waiting on https://github.com/mquandalle/meteor-collection-mutations/issues/1 to remove...
   pushLabel(name, color) {
     const _id = Random.id(6);
+    console.log(_id);
     Boards.direct.update(this._id, { $push: {labels: { _id, name, color }}});
     return _id;
   },
