@@ -11,8 +11,6 @@ template(name="listHeader")
           span.lowercase
             |  {{_ 'cards'}}
       if currentUser.isBoardMember
-        if isWatching
-          i.list-header-watch-icon.fa.fa-eye
         a.list-header-menu-icon.fa.fa-navicon.js-open-list-menu
 
 template(name="editListTitleForm")
@@ -23,9 +21,6 @@ template(name="editListTitleForm")
       a.fa.fa-times-thin.js-close-inlined-form
 
 template(name="listActionPopup")
-  ul.pop-over-list
-    li: a.js-toggle-watch-list {{#if isWatching}}{{_ 'unwatch'}}{{else}}{{_ 'watch'}}{{/if}}
-  hr
   ul.pop-over-list
     li: a.js-add-card {{_ 'add-card'}}
     if cards.count

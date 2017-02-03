@@ -55,10 +55,6 @@ Template.editNotificationPopup.events({
     const user = Meteor.user();
     if (user) user.toggleTag('notify-participate');
   },
-  'click .js-toggle-tag-notify-watch'() {
-    const user = Meteor.user();
-    if (user) user.toggleTag('notify-watch');
-  },
 });
 
 // XXX For some reason the useraccounts autofocus isnt working in this case.

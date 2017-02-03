@@ -1,5 +1,5 @@
 //设置网站根URL
-Meteor.absoluteUrl.defaultOptions.rootUrl = "http://192.168.132.205:3000/";
+Meteor.absoluteUrl.defaultOptions.rootUrl = "http://192.168.132.206:3000/";
 //创建一个数据库
 Activities = new Mongo.Collection('activities');
 
@@ -50,7 +50,6 @@ if (Meteor.isServer) {
   Activities.after.insert((userId, doc) => {
     const activity = Activities._transform(doc);
     let participants = [];
-    let watchers = [];
     let title = 'act-activity-notify';
     let board = null;
     const description = `act-${activity.activityType}`;
@@ -74,18 +73,15 @@ if (Meteor.isServer) {
     }
     if (activity.listId) {
       const list = activity.list();
-      watchers = _.union(watchers, list.watchers || []);
       params.list = list.title;
     }
     if (activity.oldListId) {
       const oldList = activity.oldList();
-      watchers = _.union(watchers, oldList.watchers || []);
       params.oldList = oldList.title;
     }
     if (activity.cardId) {
       const card = activity.card();
       participants = _.union(participants, [card.userId], card.members || []);
-      watchers = _.union(watchers, card.watchers || []);
       params.card = card.title;
       title = 'act-withCardTitle';
       params.url = card.absoluteUrl();
@@ -102,25 +98,5 @@ if (Meteor.isServer) {
       const checklist = activity.checklist();
       params.checklist = checklist.title;
     }
-    if (board) {
-      const watchingUsers = _.pluck(_.where(board.watchers, {level: 'watching'}), 'userId');
-      const trackingUsers = _.pluck(_.where(board.watchers, {level: 'tracking'}), 'userId');
-      const mutedUsers = _.pluck(_.where(board.watchers, {level: 'muted'}), 'userId');
-      switch(board.getWatchDefault()) {
-      case 'muted':
-        participants = _.intersection(participants, trackingUsers);
-        watchers = _.intersection(watchers, trackingUsers);
-        break;
-      case 'tracking':
-        participants = _.difference(participants, mutedUsers);
-        watchers = _.difference(watchers, mutedUsers);
-        break;
-      }
-      watchers = _.union(watchers, watchingUsers || []);
-    }
-
-    Notifications.getUsers(participants, watchers).forEach((user) => {
-      Notifications.notify(user, title, description, params);
-    });
   });
 }

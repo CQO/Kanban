@@ -1,12 +1,8 @@
 template(name="headerUserBar")
-  #header-user-bar
+  #header-user-bar.board-header-btn
     a.header-user-bar-name.js-open-header-member-menu
       .header-user-bar-avatar
         +userAvatar(userId=currentUser._id)
-      if currentUser.profile.fullname
-        = currentUser.profile.fullname
-      else
-        = currentUser.username
 
 template(name="memberMenuPopup")
   ul.pop-over-list
@@ -38,13 +34,6 @@ template(name="editProfilePopup")
 
 template(name="editNotificationPopup")
   ul.pop-over-list
-    li
-      a.js-toggle-tag-notify-watch
-        i.fa.fa-eye.colorful
-        | {{_ 'watching'}}
-        if hasTag "notify-watch"
-          i.fa.fa-check
-        span.sub-name {{_ 'notify-watch'}}
     li
       a.js-toggle-tag-notify-participate
         i.fa.fa-bell.colorful

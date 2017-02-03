@@ -18,14 +18,9 @@ BlazeComponent.extendComponent({
 
   onCreated() {
     this.isLoaded = new ReactiveVar(false);
-    this.parentComponent().showOverlay.set(true);
+    //this.parentComponent().showOverlay.set(true);
     this.parentComponent().mouseHasEnterCardDetails = false;
     this.calculateNextPeak();
-  },
-
-  isWatching() {
-    const card = this.currentData();
-    return card.findWatcher(Meteor.userId());
   },
 
   scrollParentContainer() {
@@ -55,11 +50,6 @@ BlazeComponent.extendComponent({
   onRendered() {
     if (!Utils.isMiniScreen()) this.scrollParentContainer();
   },
-
-  onDestroyed() {
-    this.parentComponent().showOverlay.set(false);
-  },
-
   events() {
     const events = {
       [`${CSSEvents.transitionend} .js-card-details`]() {
@@ -92,7 +82,6 @@ BlazeComponent.extendComponent({
       'click .js-add-members': Popup.open('cardMembers'),
       'click .js-add-labels': Popup.open('cardLabels'),
       'mouseenter .js-card-details'() {
-        this.parentComponent().showOverlay.set(true);
         this.parentComponent().mouseHasEnterCardDetails = true;
       },
     }];
@@ -138,6 +127,7 @@ BlazeComponent.extendComponent({
 
 Template.cardDetailsActionsPopup.helpers({
   isWatching() {
+    console.log("err");
     return this.findWatcher(Meteor.userId());
   },
 });
@@ -165,13 +155,6 @@ Template.cardDetailsActionsPopup.events({
     Popup.close();
   },
   'click .js-more': Popup.open('cardMore'),
-  'click .js-toggle-watch-card'() {
-    const currentCard = this;
-    const level = currentCard.findWatcher(Meteor.userId()) ? null : 'watching';
-    Meteor.call('watch', 'card', currentCard._id, level, (err, ret) => {
-      if (!err && ret) Popup.close();
-    });
-  },
 });
 
 Template.editCardTitleForm.onRendered(function() {

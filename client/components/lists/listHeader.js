@@ -9,11 +9,6 @@ BlazeComponent.extendComponent({
     }
   },
 
-  isWatching() {
-    const list = this.currentData();
-    return list.findWatcher(Meteor.userId());
-  },
-
   limitToShowCardsCount() {
     return Meteor.user().getLimitToShowCardsCount();
   },
@@ -32,6 +27,7 @@ BlazeComponent.extendComponent({
 
 Template.listActionPopup.helpers({
   isWatching() {
+    console.log("err");
     return this.findWatcher(Meteor.userId());
   },
 });
@@ -50,13 +46,6 @@ Template.listActionPopup.events({
     const cardIds = this.allCards().map((card) => card._id);
     MultiSelection.add(cardIds);
     Popup.close();
-  },
-  'click .js-toggle-watch-list'() {
-    const currentList = this;
-    const level = currentList.findWatcher(Meteor.userId()) ? null : 'watching';
-    Meteor.call('watch', 'list', currentList._id, level, (err, ret) => {
-      if (!err && ret) Popup.close();
-    });
   },
   //归档按钮点击事件
   'click .js-close-list'(evt) {
