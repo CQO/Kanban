@@ -18,6 +18,7 @@ BlazeComponent.extendComponent({
 
   onCreated() {
     this.isLoaded = new ReactiveVar(false);
+    this.parentComponent().showOverlay.set(true);
     this.parentComponent().mouseHasEnterCardDetails = false;
     this.calculateNextPeak();
   },
@@ -54,17 +55,17 @@ BlazeComponent.extendComponent({
   onRendered() {
     if (!Utils.isMiniScreen()) this.scrollParentContainer();
   },
-  //mousePos(){
-    //在可视位置显示卡片弹窗
-    //卡片数列*40实现 很傻的方法
-    //let height = Cards.findOne(Session.get('currentCard')).sort;
-    //height = height*40-200;
-    //if(height<0) height=0;
-    //return "margin-top: "+height+"px;";
-  //},
+
+  onDestroyed() {
+    this.parentComponent().showOverlay.set(false);
+  },
+
   events() {
     const events = {
       [`${CSSEvents.transitionend} .js-card-details`]() {
+        this.isLoaded.set(true);
+      },
+      [`${CSSEvents.animationend} .js-card-details`]() {
         this.isLoaded.set(true);
       },
     };
@@ -91,6 +92,7 @@ BlazeComponent.extendComponent({
       'click .js-add-members': Popup.open('cardMembers'),
       'click .js-add-labels': Popup.open('cardLabels'),
       'mouseenter .js-card-details'() {
+        this.parentComponent().showOverlay.set(true);
         this.parentComponent().mouseHasEnterCardDetails = true;
       },
     }];
@@ -144,6 +146,8 @@ Template.cardDetailsActionsPopup.events({
   'click .js-members': Popup.open('cardMembers'),
   'click .js-labels': Popup.open('cardLabels'),
   'click .js-attachments': Popup.open('cardAttachments'),
+  'click .js-start-date': Popup.open('editCardStartDate'),
+  'click .js-due-date': Popup.open('editCardDueDate'),
   'click .js-move-card': Popup.open('moveCard'),
   'click .js-move-card-to-top'(evt) {
     evt.preventDefault();
@@ -161,6 +165,13 @@ Template.cardDetailsActionsPopup.events({
     Popup.close();
   },
   'click .js-more': Popup.open('cardMore'),
+  'click .js-toggle-watch-card'() {
+    const currentCard = this;
+    const level = currentCard.findWatcher(Meteor.userId()) ? null : 'watching';
+    Meteor.call('watch', 'card', currentCard._id, level, (err, ret) => {
+      if (!err && ret) Popup.close();
+    });
+  },
 });
 
 Template.editCardTitleForm.onRendered(function() {

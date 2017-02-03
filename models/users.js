@@ -55,6 +55,10 @@ Users.attachSchema(new SimpleSchema({
     type: String,
     optional: true,
   },
+  'profile.hiddenSystemMessages': {
+    type: Boolean,
+    optional: true,
+  },
   'profile.initials': {
     type: String,
     optional: true,
@@ -69,6 +73,10 @@ Users.attachSchema(new SimpleSchema({
   },
   'profile.notifications': {
     type: [String],
+    optional: true,
+  },
+  'profile.showCardsCountAt': {
+    type: Number,
     optional: true,
   },
   'profile.starredBoards': {
@@ -147,6 +155,11 @@ Users.helpers({
     return _.contains(notifications, activityId);
   },
 
+  hasHiddenSystemMessages() {
+    const profile = this.profile || {};
+    return profile.hiddenSystemMessages || false;
+  },
+
   getEmailBuffer() {
     const {emailBuffer = []} = this.profile;
     return emailBuffer;
@@ -166,7 +179,12 @@ Users.helpers({
       return this.username[0].toUpperCase();
     }
   },
-  //根据UserID获取用户名
+
+  getLimitToShowCardsCount() {
+    const profile = this.profile || {};
+    return profile.showCardsCountAt;
+  },
+   //根据UserID获取用户名
   getName() {
     const profile = this.profile || {};
     return profile.fullname || this.username;
@@ -228,6 +246,14 @@ Users.mutations({
       this.addTag(tag);
   },
 
+  toggleSystem(value = false) {
+    return {
+      $set: {
+        'profile.hiddenSystemMessages': !value,
+      },
+    };
+  },
+
   addNotification(activityId) {
     return {
       $addToSet: {
@@ -263,6 +289,10 @@ Users.mutations({
   setAvatarUrl(avatarUrl) {
     return { $set: { 'profile.avatarUrl': avatarUrl }};
   },
+
+  setShowCardsCountAt(limit) {
+    return { $set: { 'profile.showCardsCountAt': limit } };
+  },
 });
 
 Meteor.methods({
@@ -274,6 +304,14 @@ Meteor.methods({
     } else {
       Users.update(this.userId, {$set: { username }});
     }
+  },
+  toggleSystemMessages() {
+    const user = Meteor.user();
+    user.toggleSystem(user.hasHiddenSystemMessages());
+  },
+  changeLimitToShowCardsCount(limit) {
+    check(limit, Number);
+    Meteor.user().setShowCardsCountAt(limit);
   },
 });
 

@@ -1,5 +1,8 @@
 Cards = new Mongo.Collection('cards');
 
+// XXX To improve pub/sub performances a card document should include a
+// de-normalized number of comments so we don't have to publish the whole list
+// of comments just to display the number of them in the board view.
 Cards.attachSchema(new SimpleSchema({
   title: {
     type: String,
@@ -51,6 +54,14 @@ Cards.attachSchema(new SimpleSchema({
   },
   members: {
     type: [String],
+    optional: true,
+  },
+  startAt: {
+    type: Date,
+    optional: true,
+  },
+  dueAt: {
+    type: Date,
     optional: true,
   },
   // XXX Should probably be called `authorId`. Is it even needed since we have
@@ -133,6 +144,36 @@ Cards.helpers({
     // todo XXX we could return a default "upload pending" image in the meantime?
     return cover && cover.url() && cover;
   },
+
+  checklists() {
+    return Checklists.find({ cardId: this._id }, { sort: { createdAt: 1 }});
+  },
+
+  checklistItemCount() {
+    const checklists = this.checklists().fetch();
+    return checklists.map((checklist) => {
+      return checklist.itemCount();
+    }).reduce((prev, next) => {
+      return prev + next;
+    }, 0);
+  },
+
+  checklistFinishedCount() {
+    const checklists = this.checklists().fetch();
+    return checklists.map((checklist) => {
+      return checklist.finishedCount();
+    }).reduce((prev, next) => {
+      return prev + next;
+    }, 0);
+  },
+
+  checklistFinished() {
+    return this.hasChecklist() && this.checklistItemCount() === this.checklistFinishedCount();
+  },
+
+  hasChecklist() {
+    return this.checklistItemCount() !== 0;
+  },
   //获取绝对路径
   absoluteUrl() {
     const board = this.board();
@@ -203,13 +244,27 @@ Cards.mutations({
   },
 
   setCover(coverId) {
-    console.log("setCover");
     return { $set: { coverId }};
   },
 
   unsetCover() {
-    console.log("unsetCover");
     return { $unset: { coverId: '' }};
+  },
+
+  setStart(startAt) {
+    return { $set: { startAt }};
+  },
+
+  unsetStart() {
+    return { $unset: { startAt: '' }};
+  },
+
+  setDue(dueAt) {
+    return { $set: { dueAt }};
+  },
+
+  unsetDue() {
+    return { $unset: { dueAt: '' }};
   },
 });
 
@@ -267,12 +322,12 @@ if (Meteor.isServer) {
     }
   });
 
-  //卡片添加移除的函数
+  // Add a new activity if we add or remove a member to the card
   Cards.before.update((userId, doc, fieldNames, modifier) => {
     if (!_.contains(fieldNames, 'members'))
       return;
     let memberId;
-    // 卡片添加成员事件
+    // Say hello to the new member
     if (modifier.$addToSet && modifier.$addToSet.members) {
       memberId = modifier.$addToSet.members;
       if (!_.contains(doc.members, memberId)) {
@@ -286,7 +341,7 @@ if (Meteor.isServer) {
       }
     }
 
-    // 卡片移除成员事件
+    // Say goodbye to the former member
     if (modifier.$pull && modifier.$pull.members) {
       memberId = modifier.$pull.members;
       Activities.insert({
@@ -299,9 +354,8 @@ if (Meteor.isServer) {
     }
   });
 
-  //删除卡片以及所有与卡片相关联的活动
+  // Remove all activities associated with a card if we remove the card
   Cards.after.remove((userId, doc) => {
-    console.log(doc);
     Activities.remove({
       cardId: doc._id,
     });

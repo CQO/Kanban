@@ -10,6 +10,8 @@ template(name="cardDetails")
         h2.card-details-title.js-card-title(
           class="{{#if currentUser.isBoardMember}}js-open-inlined-form is-editable{{/if}}")
             = title
+            if isWatching
+              i.fa.fa-eye.card-details-watch
 
     if archived
       p.warning {{_ 'card-archived'}}
@@ -33,6 +35,16 @@ template(name="cardDetails")
           a.card-label.add-label.js-add-labels(title="{{_ 'card-labels-title'}}")
             i.fa.fa-plus
 
+      if startAt
+        .card-details-item.card-details-item-start
+          h3.card-details-item-title {{_ 'card-start'}}
+          +cardStartDate
+
+      if dueAt
+        .card-details-item.card-details-item-due
+          h3.card-details-item-title {{_ 'card-due'}}
+          +cardDueDate
+
 
     //- XXX We should use "editable" to avoid repetiting ourselves
     if currentUser.isBoardMember
@@ -41,10 +53,10 @@ template(name="cardDetails")
         +editor(autofocus=true)
           | {{getUnsavedValue 'cardDescription' _id description}}
         .edit-controls.clearfix
-          button.fa.fa-check.primary(type="submit")
-          a.fa.fa-times.js-close-inlined-form
+          button.primary(type="submit") {{_ 'save'}}
+          a.fa.fa-times-thin.js-close-inlined-form
       else
-        a.js-open-inlined-form.comment-form
+        a.js-open-inlined-form
           if description
             +viewer
               = description
@@ -60,6 +72,10 @@ template(name="cardDetails")
       h3.card-details-item-title {{_ 'description'}}
       +viewer
         = description
+
+    hr
+    +checklists(cardId = _id)
+
     if attachments.count
       hr
       h2
@@ -79,13 +95,19 @@ template(name="editCardTitleForm")
   textarea.js-edit-card-title(rows='1' autofocus)
     = title
   .edit-controls.clearfix
-    button.fa.fa-check.js-submit-edit-card-title-form(type="submit")
+    button.primary.confirm.js-submit-edit-card-title-form(type="submit") {{_ 'save'}}
+    a.fa.fa-times-thin.js-close-inlined-form
 
 template(name="cardDetailsActionsPopup")
+  ul.pop-over-list
+    li: a.js-toggle-watch-card {{#if isWatching}}{{_ 'unwatch'}}{{else}}{{_ 'watch'}}{{/if}}
+  hr
   ul.pop-over-list
     li: a.js-members {{_ 'card-edit-members'}}
     li: a.js-labels {{_ 'card-edit-labels'}}
     li: a.js-attachments {{_ 'card-edit-attachments'}}
+    li: a.js-start-date {{_ 'editCardStartDatePopup-title'}}
+    li: a.js-due-date {{_ 'editCardDueDatePopup-title'}}
   hr
   ul.pop-over-list
     li: a.js-move-card-to-top {{_ 'moveCardToTop-title'}}

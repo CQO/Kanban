@@ -5,9 +5,11 @@ Template.headerUserBar.events({
 
 Template.memberMenuPopup.events({
   'click .js-edit-profile': Popup.open('editProfile'),
+  'click .js-change-settings': Popup.open('changeSettings'),
   'click .js-change-avatar': Popup.open('changeAvatar'),
   'click .js-change-password': Popup.open('changePassword'),
   'click .js-change-language': Popup.open('changeLanguage'),
+  'click .js-edit-notification': Popup.open('editNotification'),
   'click .js-logout'(evt) {
     evt.preventDefault();
 
@@ -21,24 +23,47 @@ Template.editProfilePopup.events({
     const fullname = tpl.find('.js-profile-fullname').value.trim();
     const username = tpl.find('.js-profile-username').value.trim();
     const initials = tpl.find('.js-profile-initials').value.trim();
-    Users.update(Meteor.userId(), {
-      $set: {
-        'profile.fullname': fullname,
-        'profile.initials': initials,
-      }
-    });
+    Users.update(Meteor.userId(), {$set: {
+      'profile.fullname': fullname,
+      'profile.initials': initials,
+    }});
     // 给用户返回错误信息
     if (username !== Meteor.user().username) {
-      Meteor.call('setUsername', username);
-    }
-    Popup.back();
+      Meteor.call('setUsername', username, function(error) {
+        const messageElement = tpl.$('.username-taken');
+        if (error) {
+          messageElement.show();
+        } else {
+          messageElement.hide();
+          Popup.back();
+        }
+      });
+    } else Popup.back();
   },
 });
 
+Template.editNotificationPopup.helpers({
+  hasTag(tag) {
+    const user = Meteor.user();
+    return user && user.hasTag(tag);
+  },
+});
+
+// we defined github like rules, see: https://github.com/settings/notifications
+Template.editNotificationPopup.events({
+  'click .js-toggle-tag-notify-participate'() {
+    const user = Meteor.user();
+    if (user) user.toggleTag('notify-participate');
+  },
+  'click .js-toggle-tag-notify-watch'() {
+    const user = Meteor.user();
+    if (user) user.toggleTag('notify-watch');
+  },
+});
 
 // XXX For some reason the useraccounts autofocus isnt working in this case.
 // See https://github.com/meteor-useraccounts/core/issues/384
-Template.changePasswordPopup.onRendered(function () {
+Template.changePasswordPopup.onRendered(function() {
   this.find('#at-field-current_password').focus();
 });
 
@@ -63,5 +88,28 @@ Template.changeLanguagePopup.events({
       },
     });
     evt.preventDefault();
+  },
+});
+
+Template.changeSettingsPopup.helpers({
+  hiddenSystemMessages() {
+    return Meteor.user().hasHiddenSystemMessages();
+  },
+  showCardsCountAt() {
+    return Meteor.user().getLimitToShowCardsCount();
+  },
+});
+
+Template.changeSettingsPopup.events({
+  'click .js-toggle-system-messages'() {
+    Meteor.call('toggleSystemMessages');
+  },
+  'click .js-apply-show-cards-at'(evt, tpl) {
+    evt.preventDefault();
+    const minLimit = parseInt(tpl.$('#show-cards-count-at').val(), 10);
+    if (!isNaN(minLimit)) {
+      Meteor.call('changeLimitToShowCardsCount', minLimit);
+      Popup.back();
+    }
   },
 });

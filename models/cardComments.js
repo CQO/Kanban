@@ -60,6 +60,9 @@ CardComments.helpers({
 CardComments.hookOptions.after.update = { fetchPrevious: false };
 
 if (Meteor.isServer) {
+  Meteor.startup(() => {
+    CardComments._collection._ensureIndex({ cardId: 1, createdAt: -1 });
+  });
   //在活动上记录下添加评论这一条信息
   CardComments.after.insert((userId, doc) => {
     Activities.insert({
