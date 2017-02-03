@@ -6,8 +6,8 @@
 meteor-base@1.0.4
 
 # 构建系统
-ecmascript@0.5.9
-stylus@2.513.6
+ecmascript@0.6.1
+stylus@2.513.8
 standard-minifier-css@1.3.2
 standard-minifier-js@1.2.1
 mquandalle:jade
@@ -28,7 +28,7 @@ mongo@1.1.14
 mquandalle:collection-mutations
 
 # 账户系统
-accounts-password@1.3.1
+accounts-password@1.3.3
 service-configuration@1.0.11
 useraccounts:core
 useraccounts:unstyled

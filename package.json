@@ -20,6 +20,7 @@
     "eslint": "^2.0.0"
   },
   "dependencies": {
+    "babel-runtime": "^6.22.0",
     "bcrypt": "^1.0.2",
     "xss": "^0.2.13"
   }
