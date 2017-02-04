@@ -80,7 +80,7 @@
     "change-settings": "个人设置",
     "changeSettingsPopup-title": "个人设置",
     "hide-system-messages": "隐藏系统提示",
-    "invalid-date": "Invalid date",
+    "invalid-date": "时间格式不正确",
     "what-to-do": "What do you want to do?",
     "show-cards-minimum-count": "当清单里包含多少卡片时显示卡片计数",
     "checklists": "清单",
@@ -294,5 +294,9 @@
     "worldBoards":"公开看板",
     "rename-list":"重命名清单",
     "app-is-offline":"和服务器链接中断，请保存重要内容，服务器恢复时页面会自动刷新。",
-    "remove-list":"移除清单"
+    "remove-list":"移除清单",
+    "editCardStartDatePopup-title": "开始时间",
+    "editCardDueDatePopup-title": "完成时间",
+    "date":"日期",
+    "time":"时间"
     }
