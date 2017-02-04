@@ -1,7 +1,4 @@
 BlazeComponent.extendComponent({
-  mixins() {
-    return [Mixins.PerfectScrollbar];
-  },
   //增加卡片事件
   openForm(options) {
     options = options || {};

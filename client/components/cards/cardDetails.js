@@ -1,8 +1,4 @@
 BlazeComponent.extendComponent({
-  mixins() {
-    return [Mixins.InfiniteScrolling, Mixins.PerfectScrollbar];
-  },
-
   calculateNextPeak() {
     const cardElement = this.find('.js-card-details');
     if (cardElement) {

@@ -9,10 +9,6 @@ const viewTitles = {
 };
 
 BlazeComponent.extendComponent({
-  mixins() {
-    return [Mixins.InfiniteScrolling, Mixins.PerfectScrollbar];
-  },
-
   onCreated() {
     const initOpen = Utils.isMiniScreen() ? false : (!Session.get('currentCard'));
     this._isOpen = new ReactiveVar(initOpen);

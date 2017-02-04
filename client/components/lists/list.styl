@@ -38,7 +38,7 @@
 .list-header
   margin: 8px 12px 3px
   min-height: 20px
-  max-height: 34px
+  max-height: 35px
   .inlined-form
     .fa-check
       background: rgba(255, 255, 255, 0)
@@ -52,25 +52,20 @@
       float: right
 
   .list-header-name
-    display: block
-    font-size: 16px
-    line-height: 17px
-    margin: 0
-    font-weight: bold
-    min-height: 9px
-    overflow: hidden
-    text-overflow: ellipsis
-    word-wrap: break-word
+    font-size: 1rem;
+    line-height: 1rem;
+    margin: 0;
+    height: 1rem;
+    overflow: hidden;
+    word-wrap: break-word;
     width: 90%;
     white-space: nowrap;
     text-overflow: ellipsis;
 
   .list-header-menu-icon
-    position: absolute
-    padding: 7px
-    margin-top: 1px
-    top: -@padding
-    right: -2px
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
 
 .list-body
   flex: 1
@@ -111,9 +106,3 @@
       background: rgb(191, 211, 241)
       color: #222
       box-shadow: 0 1px 2px rgba(0,0,0,.2)
-
-@media screen and (max-width: 800px)
-  #content
-    .js-list-header
-      .list-header-menu-icon
-        right: -2px
