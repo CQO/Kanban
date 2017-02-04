@@ -1,7 +1,6 @@
 @import 'nib'
 
 .list
-  box-sizing: border-box
   display: flex
   flex-direction: column
   flex: 0 0 270px
@@ -9,11 +8,7 @@
   background-color: rgba(135, 206, 235, 0.62)
   border-radius: 6px
   margin: 4px;
-  float: left
   min-width: 300px
-
-  &:first-child
-    margin-left: 5px
 
   &.ui-sortable-helper
     box-shadow: -2px 2px 8px rgba(0, 0, 0, .3),
@@ -41,9 +36,7 @@
       background: white
       margin: -3px 0 8px
 .list-header
-  flex: 0 0 auto
   margin: 8px 12px 3px
-  position: relative
   min-height: 20px
   max-height: 34px
   .inlined-form
@@ -57,9 +50,6 @@
       bottom: 42px
       right: 6px
       float: right
-
-  &.ui-sortable-handle
-    float: left
 
   .list-header-name
     display: block

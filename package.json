@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.22.0",
-    "bcrypt": "^1.0.2",
+    "bcrypt": "^0.8.7",
     "xss": "^0.2.13"
   }
 }
