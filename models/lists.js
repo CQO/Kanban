@@ -106,6 +106,18 @@ if (Meteor.isServer) {
       listId: doc._id,
     });
   });
+  //移除清单函数
+  Lists.before.remove((userId, doc) => {
+     Activities.insert({
+       userId,
+       type: 'list',
+       activityType: 'removeList',
+       boardId: doc.boardId,
+       listId: doc._id,
+       title: doc.title,
+     });
+  });
+
   //归档清单函数
   Lists.after.update((userId, doc) => {
     if (doc.archived) {
