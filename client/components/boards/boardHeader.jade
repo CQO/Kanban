@@ -37,7 +37,7 @@ template(name="boardHeaderBar")
           span {{_ currentBoard.permission}}
 
       .separator
-      a.board-header-btn.js-open-board-menu
+      a.board-header-btn.js-open-board-menu(title="{{_ 'boardMenuPopup-title'}}")
         i.board-header-btn-icon.fa.fa-navicon
       +headerUserBar
 
