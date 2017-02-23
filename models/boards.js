@@ -395,6 +395,7 @@ if (Meteor.isServer) {
       _id: 1,
       'members.userId': 1,
     }, { unique: true });
+    Boards._collection._ensureIndex({'members.userId': 1});
   });
 
   // 用户注册初始创建的示例板块

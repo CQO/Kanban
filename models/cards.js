@@ -271,7 +271,7 @@ Cards.mutations({
 if (Meteor.isServer) {
   // 面板经常调用这些功能，所以我们创建索引，以使查询效率更高。
   Meteor.startup(() => {
-    Cards._collection._ensureIndex({ boardId: 1 });
+    Cards._collection._ensureIndex({ boardId: 1, createdAt: -1 });
   });
   //插入卡片服务端函数
   Cards.after.insert((userId, doc) => {
