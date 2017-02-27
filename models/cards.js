@@ -356,9 +356,18 @@ if (Meteor.isServer) {
     }
   });
 
-  // Remove all activities associated with a card if we remove the card
+  // 如果我们移除卡片，移除与卡片相关联的所有活动
   Cards.after.remove((userId, doc) => {
     Activities.remove({
+      cardId: doc._id,
+    });
+    Checklists.remove({
+      cardId: doc._id,
+    });
+    CardComments.remove({
+      cardId: doc._id,
+    });
+    Attachments.remove({
       cardId: doc._id,
     });
   });
