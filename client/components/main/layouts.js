@@ -1,5 +1,6 @@
 Meteor.subscribe('boards');
-BlazeLayout.setRoot('body');
+Meteor.subscribe('setting');
+Meteor.subscribe('user-admin');
 
 const i18nTagToT9n = (i18nTag) => {
   return i18nTag;
