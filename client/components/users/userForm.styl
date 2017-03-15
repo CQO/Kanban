@@ -1,61 +1,80 @@
-@import 'nib'
-
+.land-title
+  background-color: darkmagenta;
+  .js-userform-set-language
+    width: 150px;
+    height: 24px;
+    margin: 3px 2px;
+  .item
+    float: right;
+  p
+    height: 30px;
+    line-height: 30px;
+    margin: 0;
+    color: blanchedalmond;
+    width: 110px;
 .auth-dialog
-  width: 275px
-  padding: 25px
-  background: rgba(255, 255, 255, 0.7)
-  border-radius: 3px
-  border: 1px solid #dbdbdb
-  border-bottom-color: #c2c2c2
-  box-shadow: 0 1px 6px rgba(0, 0, 0, .3)
-  z-index: 1
-  margin: auto
-  position: absolute
-  top: 100px
-  left: 0
-  right: 0
-
+  width: 100%;
+  height: 100%;
+  background-color: steelblue;
   .at-form
-    .at-link
-      color: darken(#27AE60, 40%)
-
-    label
-      margin-bottom: 3px
+    width: 300px;
+    background: white;
+    border-radius: 3px;
+    z-index: 1;
+    margin: 10% auto;
+    p, label
+      color: #00ced1;
+    a
+      color: cornflowerblue
 
     input
       width: 100%
 
     button
       width: 100%
-      background: #216694
-      color: #fff
+      background: skyblue;
+      color: ghostwhite;
+      margin-top: 15px;
+      height: 50px;
+      font-size: 1.6rem;
 
     .at-title
-      background: rgba(247, 247, 247, 0.8)
-      margin: -25px
-      padding: 15px 25px 5px
-      margin-bottom: 20px
-      border-bottom: 1px solid #dcdcdc
-      color: darken(white, 70%)
-      font-weight: bold
-
-    .at-signup-link,
-    .at-signin-link,
-    .at-forgotPwd
-      font-size: 0.9em
-      margin-top: 15px
-      color: darken(white, 70%)
+      background: aliceblue;
+      padding-left: 15px;
+      color: #4d4d4d;
+      font-weight: bold;
+      border-radius: 5px 5px 0 0;
+      h3
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
 
       .at-signUp,
       .at-signIn
         font-weight: bold
+    .at-pwd-form
+      margin: 10px;
+      label
+        height: 20px;
+      .at-input
+        height: 60px;
+      form
+        height: 100%;
 
-  .at-form-lang
-    margin-top: 0px
+    .at-signup-link
+      p
+        text-align: right;
+        margin-right: 15px;
+    .at-error
+      p
+        padding-left: 10px;
+        background-color: coral;
+        color: white;
+        font-size: 1rem;
+        height: 1.4rem;
+        line-height: 1.4rem;
 
-    .select-lang
-      width: 100%
-      margin-top: 10px
+
 
 @media screen and (max-width: 800px)
   .auth-layout
@@ -75,7 +94,7 @@
       img
         width: 125px
 
-    .auth-dialog
+    .at-form .auth-dialog
       width:90%
       height:100%
       width: calc(100% - 50px)

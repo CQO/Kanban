@@ -10,15 +10,17 @@ head
   link(rel="shortcut icon" href="/wekan-favicon.png")
 
 template(name="userFormsLayout")
-    section.auth-dialog
-      +Template.dynamic(template=content)
-      div.at-form-lang
-        select.select-lang.js-userform-set-language
-          each languages
-            if isCurrentLanguage
-              option(value="{{tag}}" selected="selected") {{name}}
-            else
-              option(value="{{tag}}") {{name}}
+  .land-title
+    select.js-userform-set-language.item
+      each languages
+        if isCurrentLanguage
+          option(value="{{tag}}" selected="selected") {{name}}
+        else
+          option(value="{{tag}}") {{name}}
+    p.item Language/语言:
+  section.auth-dialog
+    +Template.dynamic(template=content)
+
 
 template(name="defaultLayout")
   +header

@@ -7,12 +7,13 @@
 
   #header-main-bar
     height: 35px
+    display: flex;
+    justify-content: flex-end;
 
     .board-header-btns
       display: block
       width: auto
 
-      // XXX Use a flexbox instead of floats?
       &.left
         float: left
         line-height: 35px
@@ -20,7 +21,6 @@
         margin-left: 10px
 
       &.right
-        float: right
         padding-top: 2px
 
       &.title
@@ -33,17 +33,17 @@
           line-height: 35px
 
     .board-header-btn
-      padding: 0
-      height: 28px
-      font-size: 13px
+      text-align: center;
+      font-size: 0.9rem;
       float: left
       overflow: hidden
+      height: 28px;
       line-height: @height
-      margin: 0 2px
-      border-radius: 7px
+      border-radius: 5px
       position: relative
-      background: rgba(51, 88, 156, 0.35)
-      box-shadow: 1px 3px #41629e
+      background: cornflowerblue
+      box-shadow: 1px 2px #41629e
+      margin: 0 3px;
 
       .js-member
         margin:0
@@ -74,8 +74,15 @@
           left: 2px
 
     .board-header-btn:hover
-      background: #87b4eb
-      box-shadow: 2px 4px #3f51b5
+      background: blueviolet
+      box-shadow: 2px 3px #3f51b5
+
+    .js-open-archived-board
+      width: 80px;
+      text-align: center;
+
+    .js-open-world-board
+      width: 90px;
 
     .board-header-btn:active
       box-shadow: 0px 0px #717a33

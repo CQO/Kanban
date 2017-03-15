@@ -44,13 +44,13 @@ template(name="boardCatalog")
         li
           a.js-select-list= title
 
-
+//主页 头部按钮
 template(name="boardListHeaderBar")
-  .board-header-btns.right
+  .board-header-btns
     a.board-header-btn.js-open-archived-board
-      i.fa.fa-archive
+      p.icon &#xe61d;
       span {{_ 'archives'}}
     a.board-header-btn.js-open-world-board
-      i.fa.fa-globe
+      p.icon &#xe6aa;
       span {{_ 'world'}}
     +headerUserBar

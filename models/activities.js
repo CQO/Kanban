@@ -1,5 +1,5 @@
 //设置网站根URL
-Meteor.absoluteUrl.defaultOptions.rootUrl = "http://127.0.0.1:3000/";
+Meteor.absoluteUrl.defaultOptions.rootUrl = "http://192.168.132.206:3000/";
 //创建一个数据库
 Activities = new Mongo.Collection('activities');
 
