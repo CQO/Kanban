@@ -122,19 +122,12 @@
 
 .archived-lists .archived-lists-item
   border-top: 1px solid darken(white, 20%)
-  clear: both
-  padding: 5px 0
-
-  &:first-child
-    border-top: none
+  display: flex;
+  justify-content: space-between;
+  line-height: 35px;
 
   button
-    float: right
-    margin: 0
-    margin-bottom: 5px
-    padding: 0 10px 1px 5px
-    line-height: 32px
-    font-size: 16px
+    color: limegreen;
 
 @media screen and (max-width: 800px)
   .board-sidebar

@@ -3,10 +3,8 @@
 $popupWidth = 300px
 
 .pop-over
-  background: #fff
+  background: #CCFFFF
   border-radius: 3px
-  border: 1px solid #dbdbdb
-  border-bottom-color: #c2c2c2
   box-shadow: 0 1px 6px rgba(0, 0, 0, .3)
   position: absolute
   width: $popupWidth
@@ -17,14 +15,10 @@ $popupWidth = 300px
     margin: 4px -10px
     width: $popupWidth
 
-  p,
-  textarea,
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="file"]
+  p, textarea, input[type="text"], input[type="email"], input[type="password"], input[type="file"]
     margin: 4px 0 12px
     width: 100%
+    border: 1px solid #6699CC;
 
   select
     width: 100%
@@ -37,29 +31,27 @@ $popupWidth = 300px
     height: 36px
     position: relative
     margin-bottom: 8px
-    background: #F7F7F7
+    background: #66CCFF
     border-bottom: 1px solid #dcdcdc
-    color: darken(white, 60%)
+    color: white
+    display: flex;
 
     .header-title
       display: block
-      line-height: 32px
-      padding-top: 4px
-      margin: 0 10px
+      line-height: 36px
       font-weight: bold
       overflow: hidden
       text-overflow: ellipsis
       white-space: nowrap
+      margin-left: 10px;
 
     .back-btn
-      float: left
       overflow: hidden
       width: 30px
-      transition: width 0.2s
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
 
-      i.fa
-        margin: 10px
-        margin-top: 12px
 
       &.is-hidden
         width: 0
@@ -130,24 +122,29 @@ $popupWidth = 300px
 .select-members-list
   margin-bottom: 8px
 
-.pop-over-list
-  li > a
-    clear: both
+.pop-over-list li
     cursor: pointer
     display: block
     position: relative
-    text-decoration: none
-    overflow:hidden
-    line-height:33px
-
+    height: 33px
+    label{
+      line-height: 33px;
+      display: inline-block;
+    }
+    a{
+      display: flex;
+      justify-content: space-between;
+      text-decoration: none
+      overflow:hidden
+      line-height:33px
+    }
     .item-name
       display: block
       width: auto
       padding-right: 22px
 
     &:not(.disabled):hover
-      background-color: #005377
-      color: #fff
+      background-color: #66CCCC
 
       .sub-name,
       .quiet

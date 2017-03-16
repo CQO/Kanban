@@ -1,21 +1,21 @@
 template(name="archivedBoards")
-  archiving-box
+  .archiving-box
     .title.icon &#xe61d;
       | {{_ 'archived-boards'}}
 
   ul.archived-lists
     each archivedBoards
       li.archived-lists-item
-        button.js-restore-board
-          i.fa.fa-undo
-          | {{_ 'restore-board'}}
         = title
+        button.js-restore-board
+          .icon &#xe6c0;
+          | {{_ 'restore-board'}}
     else
       li.no-items-message 没有已归档板块.
 
 template(name="worldBoards")
-  h2
-    i.fa.fa-globe
+  .public
+    .title.icon &#xe6aa;
     | {{_ 'worldBoards'}}
 
   ul.archived-lists

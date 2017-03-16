@@ -5,7 +5,6 @@ input:not([type=file]),
 button
   box-sizing: border-box
   -webkit-appearance: none
-  background-color: rgba(0, 0, 0, 0);
   border-radius: 6px
   min-height: 34px
   padding: 7px
@@ -103,21 +102,23 @@ textarea
   text-decoration: none
   position: relative
 
-input[type="submit"],
-button
+input[type="submit"], button
   border: none
   cursor: pointer
   display: inline-block
   font-weight: 700
   line-height: 22px
   text-align: center
+  background-color: #6699CC;
+  color: white;
+  min-width: 70px;
 
   .wide
     padding-left: 30px
     padding-right: 30px
 
   &:hover,&:focus
-    color:#94bd3b
+    background-color: #99CCFF;
 
 
   &.negate
