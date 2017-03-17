@@ -1,5 +1,4 @@
 @import 'nib'
-
 $popupWidth = 300px
 
 .pop-over
@@ -10,23 +9,7 @@ $popupWidth = 300px
   width: $popupWidth
   z-index: 99999
   margin-top: 5px
-
-  hr
-    margin: 4px -10px
-    width: $popupWidth
-
-  p, textarea, input[type="text"], input[type="email"], input[type="password"], input[type="file"]
-    margin: 4px 0 12px
-    width: 100%
-    border: 1px solid #6699CC;
-
-  select
-    width: 100%
-    margin-bottom: 14px
-
-  textarea
-    height: 72px
-
+  /* 首页用户菜单标题栏 */
   .header
     height: 36px
     position: relative
@@ -51,10 +34,11 @@ $popupWidth = 300px
       height: 36px;
       line-height: 36px;
       text-align: center;
-
+      margin-right: -10px;
 
       &.is-hidden
         width: 0
+        margin:0
 
     .close-btn
       padding: 10px 10px 10px 4px
@@ -62,13 +46,46 @@ $popupWidth = 300px
       top: 0
       right: 0
 
-  &.no-title .header
-    background: none
 
+  /* 首页用户菜单面板 */
   .content-wrapper
     width: 100%
     overflow: hidden
-
+    form
+      label
+        display: block
+        height: 30px;
+        line-height: 30px;
+        p
+          display: inline-block
+          width: 60px;
+        input
+          width: 200px;
+  /* 确定按钮框 */
+  .determine
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    input
+      height: 26px;
+      width: 50px;
+      line-height: 23px;
+      display: block;
+      font-size: 1rem;
+      margin-top: 7px;
+      border: 0;
+      border-radius: 5px;
+      background-color: #CCCCFF;
+      color: azure;
+  /*选择头像板块，上传头像按钮*/
+  .upload
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    .js-upload-avatar
+      background-color: cornflowerblue;
+      border: 0;
+      color: white;
   .content-container
     width: 5000px
     max-height: 550px
@@ -122,13 +139,17 @@ $popupWidth = 300px
 .select-members-list
   margin-bottom: 8px
 
-.pop-over-list li
+.pop-over-list
+  li
     cursor: pointer
     display: block
     position: relative
-    height: 33px
+    height: 30px
+    display: flex;
+    justify-content: space-between;
+    margin: 2px 0;
     label{
-      line-height: 33px;
+      line-height: 30px;
       display: inline-block;
     }
     a{
@@ -136,8 +157,34 @@ $popupWidth = 300px
       justify-content: space-between;
       text-decoration: none
       overflow:hidden
+      width:100%
       line-height:33px
     }
+    /* 选择头像列表 */
+    .js-select-avatar
+      .member
+        width: 220px;
+        img
+          width: 30px;
+      .js-delete-avatar
+        width: 60px;
+        text-align: center;
+        background-color: cornflowerblue;
+        color: white;
+        border-radius: 5px;
+
+    /*选择头像板块，默认头像按钮*/
+    .default-avatar
+      width: 60px;
+      background-color: darkcyan;
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+    #show-cards-count-at
+      height: 20px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border: 0;
     .item-name
       display: block
       width: auto
@@ -152,13 +199,6 @@ $popupWidth = 300px
 
       .unread-indicator
         background: #fff
-
-    .sub-name
-      color: #8c8c8c
-      display: block
-      font-size: 12px
-      font-weight: 400
-      line-height: 15px
 
     &.current
       background-color: #e2e6e9

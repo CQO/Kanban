@@ -44,25 +44,22 @@ template(name="changeAvatarPopup")
       li: a.js-select-avatar
         .member
           img.avatar.avatar-image(src="{{url avatarUrlOptions}}")
-        | {{_ 'uploaded-avatar'}}
         if isSelected
-          i.fa.fa-check
-        p.sub-name
-          unless isSelected
-            a.js-delete-avatar {{_ 'delete'}}
-            |  -
-          = original.name
+          .icon &#xe608;
+        unless isSelected
+          .js-delete-avatar {{_ 'delete'}}
     li: a.js-select-initials
       .member
         +userAvatarInitials(userId=currentUser._id)
-      | Initials
       if noAvatarUrl
-        i.fa.fa-check
-       p.sub-name {{_ 'default-avatar'}}
+        .icon &#xe608;
+      unless noAvatarUrl
+        .default-avatar {{_ 'default-avatar'}}
   input.hide.js-upload-avatar-input(accept="image/*;capture=camera" type="file")
-  button.full.js-upload-avatar
-    i.fa.fa-upload
-    | {{_ 'upload-avatar'}}
+  .upload
+    button.full.js-upload-avatar
+      i.fa.fa-upload
+      | {{_ 'upload-avatar'}}
 
 template(name="cardMemberPopup")
   .board-member-menu
