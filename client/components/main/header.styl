@@ -6,42 +6,30 @@
   #header-main-bar
     height: 35px
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 
     .board-header-btns
-      display: block
-      width: auto
-      padding: 2px;
-
-      &.left
-        float: left
-        line-height: 35px
-        font-size: large
-        margin-left: 10px
+      color: floralwhite;
+      line-height: 35px;
+      .return
+        display: block;
+        font-size: 1.6rem;
+        margin: 0 10px;
 
       &.right
         padding-top: 2px
 
-      &.title
-        width: 200px
-        margin: 0 auto
-
         a
           float:left
-          font-size:large
           line-height: 35px
 
     .board-header-btn
       text-align: center;
       font-size: 0.9rem;
-      float: left
       overflow: hidden
       height: 28px;
-      line-height: @height
       border-radius: 5px
       position: relative
-      background: #CCFF99
-      box-shadow: 1px 2px #a2cc61
       margin: 0 3px;
 
       .js-member
@@ -53,7 +41,6 @@
         line-height: 28px
         color: darken(white, 5%)
         margin: 0 8px
-        font-size: large
 
         + span
           display: inline-block
@@ -92,6 +79,9 @@
       border-left: 1px solid rgba(255, 255, 255, .3)
       height: 24px
       float: left
+
+    .title
+      font-size: 1.6rem;
 
 #header-quick-access
   color: white
