@@ -1,36 +1,31 @@
 @import 'nib'
 
-#header
+.title-bar
   background-color: #CCCCFF
-
-  #header-main-bar
+  .header-main-bar.open
+    justify-content: space-between;
+    flex-direction: inherit;
+  .header-main-bar
     height: 35px
     display: flex;
-    justify-content: space-between;
+    flex-direction: row-reverse;
 
     .board-header-btns
-      color: floralwhite;
+      color: white;
       line-height: 35px;
+      display: flex;
       .return
         display: block;
         font-size: 1.6rem;
         margin: 0 10px;
 
-      &.right
-        padding-top: 2px
-
-        a
-          float:left
-          line-height: 35px
-
     .board-header-btn
       text-align: center;
       font-size: 0.9rem;
       overflow: hidden
-      height: 28px;
-      border-radius: 5px
+      height: 100%;
       position: relative
-      margin: 0 3px;
+      padding: 0 4px;
 
       .js-member
         margin:0
@@ -53,37 +48,18 @@
         i.fa
           margin: 0 6px
 
-      .avatar
-          background: 0
-          border-radius: 3px
-          top: -1px
-          left: 2px
-
     .board-header-btn:hover
-      background: #FFFF99
-      box-shadow: 2px 3px #a2cc61
-
-    .js-open-archived-board
-      width: 80px;
-      text-align: center;
-
-    .js-open-world-board
-      width: 90px;
-
-    .board-header-btn:active
-      box-shadow: 0px 0px #717a33
-      top: 4px
+      background-color: #CCFF99;
+      color: #6699CC;
 
     .separator
       margin: 2px 4px
       border-left: 1px solid rgba(255, 255, 255, .3)
-      height: 24px
-      float: left
 
     .title
       font-size: 1.6rem;
 
-#header-quick-access
+.header-quick-access
   color: white
   transition: background-color 0.4s
   background: #2573a7
@@ -91,7 +67,7 @@
   font-size: 12px
   display: flex
 
-  #header-user-bar,#header-new-board-icon,ul li
+  .header-user-bar,.header-new-board-icon,ul li
     color: darken(white, 17%)
 
     .fa
@@ -122,10 +98,10 @@
       a.js-create-board
         margin-left: 5px
 
-  #header-user-bar,#header-new-board-icon
+  .header-user-bar,.header-new-board-icon
     flex-shrink: 0
 
-  #header-user-bar
+  .header-user-bar
     margin: 2px 0
     height: 28px;
     float: right;
@@ -149,14 +125,14 @@
       i.fa-chevron-down
         margin-right: 4px
 
-  #header-new-board-icon
+  .header-new-board-icon
     flex-grow: 1
     margin: 6px 5px 0
     width: 12px
 
 @media screen and (max-width: 800px)
-  #header
-    #header-main-bar
+  .title-bar
+    .header-main-bar
       height: 35px
 
       .board-header-btns
@@ -176,7 +152,7 @@
           + span
             display: none
 
-  #header-quick-access
+  .header-quick-access
     transition: background-color 0.4s
     width: 100%
     padding: 10px 0px

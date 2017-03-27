@@ -188,6 +188,6 @@ Template.cardMorePopup.events({
 EscapeActions.register('detailsPane',
   () => { Utils.goBoardId(Session.get('currentBoard')); },
   () => { return !Session.equals('currentCard', null); }, {
-    noClickEscapeOn: '.js-card-details,.board-sidebar,#header',
+    noClickEscapeOn: '.js-card-details,.board-sidebar,.header',
   }
 );

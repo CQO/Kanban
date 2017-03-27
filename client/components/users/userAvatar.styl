@@ -4,9 +4,7 @@ avatar-radius = 50%
 
 .member
   border-radius: 3px
-  display: block
-  position: relative
-  float: left
+  display: flex
   height: 30px
   width: @height
   cursor: pointer
@@ -23,9 +21,8 @@ avatar-radius = 50%
       height: 70%
       width: @height
       padding: 15%
-      background-color: #789cde
-      color: #444444
-      position: absolute
+      fill: white;
+      position: relative;
       border-radius: avatar-radius
 
     &.avatar-image

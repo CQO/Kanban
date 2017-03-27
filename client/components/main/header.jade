@@ -1,6 +1,6 @@
 template(name="header")
-  #header(class=currentBoard.colorClass)
-    #header-main-bar
+  .title-bar(class=currentBoard.colorClass)
+    .header-main-bar(class="{{# if currentBoard}}open{{/if}}")
       +Template.dynamic(template=headerBar)
   if appIsOffline
     +offlineWarning
