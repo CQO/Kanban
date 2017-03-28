@@ -1,11 +1,11 @@
 template(name="boardHeaderBar")
-  .board-header-btns.left
+  .board-header-btns
     a.icon.return(href="{{pathFor 'home'}}") &#xe611;
 
   .board-header-btns.title
     with currentBoard
       = title
-  .board-header-btns.right
+  .board-header-btns
 
       a.board-header-btn.js-open-filter-view(
           title="{{#if Filter.isActive}}{{_ 'filter-on-desc'}}{{else}}{{_ 'filter'}}{{/if}}"

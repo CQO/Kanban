@@ -13,7 +13,6 @@ $popupWidth = 300px
   .header
     height: 36px
     position: relative
-    margin-bottom: 8px
     background: #66CCFF
     border-bottom: 1px solid #dcdcdc
     color: white
@@ -35,11 +34,6 @@ $popupWidth = 300px
       line-height: 36px;
       text-align: center;
       margin-right: -10px;
-
-      &.is-hidden
-        width: 0
-        margin:0
-
     .close-btn
       padding: 10px 10px 10px 4px
       position: absolute
@@ -53,14 +47,13 @@ $popupWidth = 300px
     overflow: hidden
     form
       label
-        display: block
+        display: flex
         height: 30px;
         line-height: 30px;
-        p
-          display: inline-block
-          width: 60px;
+        justify-content: space-between;
         input
           width: 200px;
+
   /* 确定按钮框 */
   .determine
     height: 30px;
@@ -77,6 +70,9 @@ $popupWidth = 300px
       border-radius: 5px;
       background-color: #CCCCFF;
       color: azure;
+    input:hover
+      background-color: blueviolet;
+
   /*选择头像板块，上传头像按钮*/
   .upload
     height: 30px;
@@ -87,17 +83,13 @@ $popupWidth = 300px
       border: 0;
       color: white;
   .content-container
-    width: 5000px
-    max-height: 550px
+    width: 100%
     transition: transform 0.2s
 
     .content
-      width: $popupWidth - 20px
-      padding: 0 10px 10px
-      float: left
-
+      margin: 7px;
       &.no-height
-        height: 20px
+        display: none;
 
   .quiet
     padding: 6px 6px 4px
@@ -132,10 +124,6 @@ $popupWidth = 300px
   .sk-spinner
     margin: 40px auto
 
-  for depth in (1..6)
-    .popup-container-depth-{depth}
-      transform: translateX(- depth * $popupWidth)
-
 .select-members-list
   margin-bottom: 8px
 
@@ -147,7 +135,7 @@ $popupWidth = 300px
     height: 30px
     display: flex;
     justify-content: space-between;
-    margin: 2px 0;
+    padding: 1px 10px;
     label{
       line-height: 30px;
       display: inline-block;
@@ -191,7 +179,7 @@ $popupWidth = 300px
       padding-right: 22px
 
     &:not(.disabled):hover
-      background-color: #66CCCC
+      background-color: #CCFF99
 
       .sub-name,
       .quiet
@@ -290,27 +278,26 @@ $popupWidth = 300px
       color: white
       background: #2980B9
       height: 48px
-      padding: 0px 0px
       border: 0px
-      margin: 0px 0px
       width: 100%
-      position: absolute
-      top: 0px
+      position: relative
 
       .header-title
-        font-size: 20px
-        font-weight: normal
-        padding-top: 8px
+        height: 48px;
+        line-height: 48px;
+        font-size: 1.2rem;
 
       .back-btn
-        width: 30px
-        padding: 8px 12px 8px 12px
+        height: 48px;
+        line-height: 48px;
 
         i.fa
           color: white
 
       .close-btn
-        padding: 10px 12px
+        padding: 0 12px;
+        height: 48px;
+        line-height: 48px;
 
         i.fa
           font-size: 24px
@@ -318,21 +305,27 @@ $popupWidth = 300px
 
     .content-wrapper
       width: 100%
-      height: calc(100% - 48px)
+      height: 100%
       overflow-y: scroll
       overflow-x: hidden
-      margin: 48px 0px 0px 0px
 
     .content-container
-      width: 1000%
+      width: 100%
       height: 100%
-      max-height: 100%
 
       .content
         width:100%
-        width: calc(10% - 20px)
         height: calc(100% - 20px)
-        padding: 10px
+        margin: 0
+        .pop-over-list
+          li
+            padding: 0
+            height: 2rem;
+            line-height: 2rem;
+            font-size: 1rem;
+            a
+              border-bottom: 1px solid #2980b9
+              margin: 0 10px
 
         form
           margin: 10px 10px
@@ -346,13 +339,6 @@ $popupWidth = 300px
         input[type="file"]
           margin: 4px 0 12px
           width: 100%
-
-    .pop-over-list
-      li > a
-        width: calc(100% - 20px)
-        padding: 10px 10px
-        margin: 0px 0px
-        border-bottom: 1px solid #eee
 
     hr
       width: 100%

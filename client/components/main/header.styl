@@ -1,5 +1,3 @@
-@import 'nib'
-
 .title-bar
   background-color: #CCCCFF
   .header-main-bar.open
@@ -14,10 +12,14 @@
       color: white;
       line-height: 35px;
       display: flex;
+
+      /* 顶部返回按钮 */
       .return
         display: block;
         font-size: 1.6rem;
         margin: 0 10px;
+      .header-user-bar-avatar
+        margin: 2px 0;
 
     .board-header-btn
       text-align: center;
@@ -27,108 +29,17 @@
       position: relative
       padding: 0 4px;
 
-      .js-member
-        margin:0
-
-      i.fa
-        float: left
-        display: block
-        line-height: 28px
-        color: darken(white, 5%)
-        margin: 0 8px
-
-        + span
-          display: inline-block
-          margin-top: 1px
-          margin-right: 10px
-
-      .board-header-btn-close
-        float: right
-
-        i.fa
-          margin: 0 6px
-
     .board-header-btn:hover
       background-color: #CCFF99;
       color: #6699CC;
 
+    /* 分割线样式 */
     .separator
       margin: 2px 4px
       border-left: 1px solid rgba(255, 255, 255, .3)
 
     .title
       font-size: 1.6rem;
-
-.header-quick-access
-  color: white
-  transition: background-color 0.4s
-  background: #2573a7
-  height: 28px
-  font-size: 12px
-  display: flex
-
-  .header-user-bar,.header-new-board-icon,ul li
-    color: darken(white, 17%)
-
-    .fa
-      color: inherit
-
-    a:hover, a.is-active
-      color: white
-
-  ul
-    transition: opacity 0.2s
-    margin: 4px 0 0 5px
-    overflow: hidden
-    font-size: initial
-
-    li
-      display: block
-      float: left
-      width: auto
-      color: darken(white, 15%)
-      padding: 2px 5px 0
-
-      &.current
-        color: darken(white, 5%)
-
-      &:first-child .fa-home
-        margin-right: 5px
-
-      a.js-create-board
-        margin-left: 5px
-
-  .header-user-bar,.header-new-board-icon
-    flex-shrink: 0
-
-  .header-user-bar
-    margin: 2px 0
-    height: 28px;
-    float: right;
-
-    .header-user-bar-avatar
-      float: left
-      position: relative
-      top: -5px
-      margin-right: 5px
-
-      .member
-        width: 24px
-        height: @width
-        margin: 0
-        margin-top: 1px
-
-    .header-user-bar-name
-      margin: 4px 8px 0 0
-      float: left
-
-      i.fa-chevron-down
-        margin-right: 4px
-
-  .header-new-board-icon
-    flex-grow: 1
-    margin: 6px 5px 0
-    width: 12px
 
 @media screen and (max-width: 800px)
   .title-bar
@@ -137,35 +48,10 @@
 
       .board-header-btns
         margin-top: 0px
-        &.title
-          a
-            display:none
+        &.title,span
+          display:none
 
-      .board-header-btn
-        height: 29px
-        line-height: @height
-        font-size: 16px
 
-        i.fa
-          line-height: 32px
-
-          + span
-            display: none
-
-  .header-quick-access
-    transition: background-color 0.4s
-    width: 100%
-    padding: 10px 0px
-    z-index: 30
-    position: absolute
-    bottom: 0px
-
-    ul
-      width: calc(100% - 150px)
-      overflow: ellipsis
-
-      li
-        height: 28px
 
 .offline-warning
   width: 100%
