@@ -101,6 +101,7 @@ Boards.attachSchema(new SimpleSchema({
           userId: this.userId,
           isAdmin: true,
           isActive: true,
+          isCommentOnly: false,
         }];
       }
     },
@@ -112,6 +113,9 @@ Boards.attachSchema(new SimpleSchema({
     type: Boolean,
   },
   'members.$.isActive': {
+    type: Boolean,
+  },
+  'members.$.isCommentOnly': {
     type: Boolean,
   },
   permission: {
@@ -199,6 +203,9 @@ Boards.helpers({
   //判断用户是否为管理员
   hasAdmin(memberId) {
     return !!_.findWhere(this.members, {userId: memberId, isActive: true, isAdmin: true});
+  },
+  hasCommentOnly(memberId) {
+    return !!_.findWhere(this.members, {userId: memberId, isActive: true, isAdmin: false, isCommentOnly: true});
   },
   //返回板块地址
   absoluteUrl() {
@@ -314,7 +321,7 @@ Boards.mutations({
     };
   },
   //设置成员权限
-  setMemberPermission(memberId, isAdmin) {
+  setMemberPermission(memberId, isAdmin, isCommentOnly) {
     const memberIndex = this.memberIndex(memberId);
     // 不能自己给自己加权限
     if (memberId === Meteor.userId()) {
@@ -323,7 +330,7 @@ Boards.mutations({
 
     return {
       $set: {
-        [`members.${memberIndex}.isAdmin`]: isAdmin,
+        [`members.${memberIndex}.isCommentOnly`]: isCommentOnly,
       },
     };
   },

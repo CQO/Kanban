@@ -35,6 +35,10 @@ Settings.attachSchema(new SimpleSchema({
 }));
 Settings.helpers({
   mailUrl () {
+    //如果邮箱地址未设置不进行操作
+    if (!this.mailServer.host) {
+      return null;
+    }
     if (!this.mailServer.username && !this.mailServer.password) {
       return `smtp://${this.mailServer.host}:${this.mailServer.port}/`;
     }
@@ -70,7 +74,7 @@ if (Meteor.isServer) {
 
   Settings.after.update((userId, doc, fieldNames) => {
     // assign new values to mail-from & MAIL_URL in environment
-    if (_.contains(fieldNames, 'mailServer')) {
+    if (_.contains(fieldNames, 'mailServer') && _.contains(fieldNames, 'host')) {
       if (!doc.mailServer.username && !doc.mailServer.password) {
         process.env.MAIL_URL = `smtp://${doc.mailServer.host}:${doc.mailServer.port}/`;
       } else {
@@ -98,13 +102,16 @@ if (Meteor.isServer) {
         url: FlowRouter.url('sign-up'),
       };
       const lang = author.getLanguage();
-      Email.send({
-        to: icode.email,
-        from: Accounts.emailTemplates.from,
-        subject: TAPi18n.__('email-invite-register-subject', params, lang),
-        text: TAPi18n.__('email-invite-register-text', params, lang),
-      });
+      if (Settings.findOne().mailUrl()) {
+        Email.send({
+          to: icode.email,
+          from: Accounts.emailTemplates.from,
+          subject: TAPi18n.__('email-invite-register-subject', params, lang),
+          text: TAPi18n.__('email-invite-register-text', params, lang),
+        });
+      }
     } catch (e) {
+      InvitationCodes.remove(_id);
       throw new Meteor.Error('email-fail', e.message);
     }
   }

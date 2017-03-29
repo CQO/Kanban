@@ -117,6 +117,7 @@
     "Notifications": true,
     "allowIsBoardAdmin": true,
     "allowIsBoardMember": true,
+    "allowIsBoardMemberNonComment": true,
     "Emoji": true
   }
 }

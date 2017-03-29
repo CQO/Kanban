@@ -3,12 +3,13 @@ template(name="checklists")
   .card-checklist-items
     each checklist in currentCard.checklists
       +checklistDetail(checklist = checklist)
-  +inlinedForm(classNames="js-add-checklist" cardId = cardId)
-    +addChecklistItemForm
-  else
-    a.js-open-inlined-form
-      i.fa.fa-plus
-      | {{_ 'add-checklist'}}...
+  if canModifyCard
+    +inlinedForm(classNames="js-add-checklist" cardId = cardId)
+      +addChecklistItemForm
+    else
+      a.js-open-inlined-form
+        i.fa.fa-plus
+        | {{_ 'add-checklist'}}...
 
 template(name="checklistDetail")
   +inlinedForm(classNames="js-edit-checklist-title" checklist = checklist)
@@ -16,9 +17,13 @@ template(name="checklistDetail")
   else
     .checklist-title
       .checkbox.fa.fa-check-square-o
-      a.fa.fa-trash.js-delete-checklist
+      if canModifyCard
+        a.fa.fa-trash.js-delete-checklist
       span.checklist-stat(class="{{#if checklist.isFinished}}is-finished{{/if}}") {{checklist.finishedCount}}/{{checklist.itemCount}}
-      h2.title.js-open-inlined-form.is-editable  {{checklist.title}}
+      if canModifyCard
+        h2.title.js-open-inlined-form.is-editable  {{checklist.title}}
+      else
+        h2.title  {{checklist.title}}
   +checklistItems(checklist = checklist)
 
 template(name="addChecklistItemForm")
@@ -34,7 +39,7 @@ template(name="editChecklistItemForm")
       = checklist.title
   .edit-controls.clearfix
     button.primary.confirm.fa.fa-check.js-submit-edit-checklist-item-form(type="submit")
-    if currentUser.isBoardMember
+    if canModifyCard
       a.fa.fa-trash.js-delete-checklist-item
 
 template(name="checklistItems")
@@ -44,7 +49,7 @@ template(name="checklistItems")
         +editChecklistItemForm(type = 'item' item = item checklist = checklist)
       else
         +itemDetail(item = item checklist = checklist)
-    if currentUser.isBoardMember
+    if canModifyCard
       +inlinedForm(classNames="js-add-checklist-item" checklist = checklist)
         +addChecklistItemForm
       else

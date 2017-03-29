@@ -12,6 +12,10 @@ BlazeComponent.extendComponent({
     activitiesComponent.loadNextPage();
   },
 
+  canModifyCard() {
+    return Meteor.user() && Meteor.user().isBoardMember() && !Meteor.user().isCommentOnly();
+  },
+
   onCreated() {
     this.isLoaded = new ReactiveVar(false);
     //this.parentComponent().showOverlay.set(true);
@@ -122,9 +126,8 @@ BlazeComponent.extendComponent({
 }).register('inlinedCardDescription');
 
 Template.cardDetailsActionsPopup.helpers({
-  isWatching() {
-    console.log("err");
-    return this.findWatcher(Meteor.userId());
+  canModifyCard() {
+    return Meteor.user() && Meteor.user().isBoardMember() && !Meteor.user().isCommentOnly();
   },
 });
 

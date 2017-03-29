@@ -195,3 +195,10 @@ BlazeComponent.extendComponent({
     }];
   },
 }).register('addListForm');
+
+
+ Template.boardBody.helpers({
+   canSeeAddList() {
+     return Meteor.user() && Meteor.user().isBoardMember() && !Meteor.user().isCommentOnly();
+    },
+});

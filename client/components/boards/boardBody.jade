@@ -23,11 +23,10 @@ template(name="boardBody")
           +list(this)
           if currentCardIsInThisList
             +cardDetails(currentCard)
-        if currentUser.isBoardMember
+        if canSeeAddList
           +addListForm
 
 template(name="addListForm")
-
     .list.js-list.list-composer.js-list-composer
       .list-header
         +inlinedForm(autoclose=false)
