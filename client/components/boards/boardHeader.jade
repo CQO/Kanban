@@ -21,10 +21,7 @@ template(name="boardHeaderBar")
             title="{{#if MultiSelection.isActive}}{{_ 'multi-selection-on'}}{{else}}{{_ 'multi-selection'}}{{/if}}"
             class="{{#if MultiSelection.isActive}}emphasis{{/if}}")
           .icon &#xe612;
-          span {{#if MultiSelection.isActive}}{{_ 'multi-selection-on'}}{{else}}{{_ 'multi-selection'}}{{/if}}
-          if MultiSelection.isActive
-            a.board-header-btn-close.js-multiselection-reset(title="{{_ 'filter-clear'}}")
-              i.fa.fa-times-thin
+          span {{_ 'multi-selection'}}
 
       if currentUser.isBoardAdmin
         a.board-header-btn(
