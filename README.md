@@ -4,7 +4,8 @@
 
 ![KanBan](http://myweb-10017157.cos.myqcloud.com/2016/1109/QQ20161109-0.png)
 
-1.安装依赖包
-npm i
-2.运行
-meteor run
+export MONGO_URL='mongodb://127.0.0.1:27017/wekan'
+export ROOT_URL='https://example.com'
+export MAIL_URL='smtp://user:pass@mailserver.example.com:25/'
+export MAIL_FROM='wekan-admin@example.com'
+export PORT=8080
