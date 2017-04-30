@@ -1,7 +1,6 @@
 .list
   display: flex;
   flex-direction: column;
-  position: relative;
   background-color: #ccfffd;
   border: 1px solid #c5d7ff;
   border-radius: 5px;
@@ -21,12 +20,14 @@
       height: 30px;
 
 .list-header
-  margin: 8px 8px 3px
+  margin: 0 10px
   min-height: 20px
   max-height: 35px
   position: relative;
   display: flex;
+
   .inlined-form
+    width: 100%;
     .fa-check
       background: 0;
       border: 0;
@@ -40,14 +41,19 @@
 
   .list-header-name
     font-size: 1rem;
-    line-height: 1rem;
+    line-height: 30px;
     margin: 0;
-    height: 1rem;
+    height: 30px;
     overflow: hidden;
     word-wrap: break-word;
     width: 265px;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+  .list-header-menu-icon
+    height: 30px
+    line-height: 30px
+    font-size: 1rem
 
 .list-body
   overflow-y: auto
