@@ -4,12 +4,13 @@ template(name="cardDetails")
       +inlinedForm(classNames="js-card-details-title")
         +editCardTitleForm
       else
-        a.fa.fa-times-thin.close-card-details.js-close-card-details
-        if currentUser.isBoardMember
-          a.fa.fa-navicon.card-details-menu.js-open-card-details-menu
-        h2.card-details-title.js-card-title(
+        span.card-details-title.js-card-title(
           class="{{#if canModifyCard}}js-open-inlined-form is-editable{{/if}}")
             = title
+        span.title-button
+          if currentUser.isBoardMember
+            a.js-open-card-details-menu.icon &#xe646;
+          a.close-card-details.js-close-card-details.icon &#xe6a8;
 
     if archived
       p.warning {{_ 'card-archived'}}
@@ -94,7 +95,6 @@ template(name="editCardTitleForm")
     = title
   .edit-controls.clearfix
     button.primary.confirm.js-submit-edit-card-title-form(type="submit") {{_ 'save'}}
-    a.fa.fa-times-thin.js-close-inlined-form
 
 template(name="cardDetailsActionsPopup")
   if canModifyCard
