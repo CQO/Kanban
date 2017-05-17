@@ -17,10 +17,5 @@ Meteor.startup(() => {
         language = navigator.language || navigator.userLanguage;
       }
     }
-
-    if (language) {
-      TAPi18n.setLanguage(language);
-      T9n.setLanguage(language);
-    }
   });
 });
